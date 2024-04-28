@@ -7,7 +7,7 @@ export default function Dashboard() {
 const searchParams = useSearchParams();
     const search = searchParams.get('pwd')
  if(search != admin123){
-     return(<div>poda dai</div>
+     return(<div>poda dai</div>)
             }
     return (
         
