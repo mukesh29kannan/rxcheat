@@ -7,20 +7,20 @@ export const authConfig = {
       async jwt({ token, user }:any) {
         if (user) {
           token.id = user.id;
-          token.isAdmin = user.isAdmin;
         }
         return token;
       },
       async session({ session, token }:any) {
         if (token) {
           session.user.id = token.id;
-          session.user.isAdmin = token.isAdmin;
         }
         return session;
       },
       authorized({ auth, request }:any) {
         const user = auth?.user;
         const isPrelogin = request.nextUrl?.pathname == '/';
+        console.log('user',user)
+        console.log('isPrelogin',isPrelogin)
         if(!isPrelogin && !user)
           return false;
         if(isPrelogin && user)
