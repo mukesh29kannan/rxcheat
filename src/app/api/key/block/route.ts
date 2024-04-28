@@ -6,10 +6,9 @@ export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
-    const { id}: any = await request.json()
-    if (id.length)  {
-
-     await Key.findByIdAndUpdate(id,{isActive:0});
+    const { id }: any = await request.json()
+    if (id.length) {
+      await Key.findByIdAndUpdate(id, { isActive: 0 });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
     throw new Error("Invalid payloads");

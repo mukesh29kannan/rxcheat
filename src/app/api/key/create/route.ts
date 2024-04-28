@@ -10,12 +10,13 @@ export const POST = async (request: NextRequest) => {
     if (key.length && period.length) {
 
       const keyExist = await Key.findOne({ key: key });
-      if (keyExist)
-        return new Error("Invalid payloads");
+      if (keyExist){
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+      }
       const futureDate = new Date();
       futureDate.setDate(futureDate.getDate() + parseInt(period));
 
-      await Key.create({
+      const keys = await Key.create({
         key: key,
         validity: futureDate,
         isActive: 1,
@@ -23,7 +24,9 @@ export const POST = async (request: NextRequest) => {
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
-    throw new Error("Invalid payloads");
+    else{
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    }
   } catch (err) {
     console.log(err);
     throw new Error("Something went wrong");

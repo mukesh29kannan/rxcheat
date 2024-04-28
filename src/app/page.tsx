@@ -4,6 +4,8 @@ import { Tabs, Tab, Input, Link, Button, Card, CardBody } from "@nextui-org/reac
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
+
 export default function Home() {
   const router = useRouter();
   const [selected, setSelected] = useState<string | number>("login");
@@ -28,7 +30,7 @@ export default function Home() {
     }
   }
 
-  const [signinFields, setSignFileds] = useState({
+  const [signinFields, setSignFileds] = useState<any>({
     name: '',
     username: '',
     password: '',
@@ -36,8 +38,8 @@ export default function Home() {
   });
 
   const submitSignIn = async () => {
-    Object.keys(signinFields).map((field: any) => {
-      if (signinFields[field].length < 3)
+    Object.keys(signinFields).map((field:string ) => {
+      if (signinFields[field]?.length < 3)
         toast.error(`Please enter the valid ${field}`);
     })
     const response = await fetch('/api/register', {
