@@ -1,10 +1,16 @@
 
 'use client'
+import { useSearchParams } from 'next/navigation';
 import AddKey from "@/components/addKey";
 import KeyList from "@/components/keyList";
 export default function Dashboard() {
-
+const searchParams = useSearchParams();
+    const search = searchParams.get('pwd')
+ if(search != admin123){
+     return(<div>poda dai</div>
+            }
     return (
+        
         <div className="px-4 py-2">
             <div className="flex justify-between ">
                 <div className="font-semibold ">Keys</div>
