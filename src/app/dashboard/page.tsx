@@ -4,7 +4,7 @@
 import AddKey from "@/components/addKey";
 import KeyList from "@/components/keyList";
 export default function Dashboard() {
-const searchParams = useSearchParams();
+//const searchParams = useSearchParams();
     //const search = searchParams.get('pwd')
     //useEffect(()=>{
         //if(search != 'admin123'){
