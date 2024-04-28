@@ -6,7 +6,7 @@ import KeyList from "@/components/keyList";
 export default function Dashboard() {
 const searchParams = useSearchParams();
     const search = searchParams.get('pwd')
- if(search != admin123){
+ if(search != 'admin123'){
      return(<div>poda dai</div>)
             }
     return (
