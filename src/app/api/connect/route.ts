@@ -2,7 +2,7 @@ import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { NextResponse, NextRequest } from "next/server";
 
-export const POST = async (request: NextRequest) => {
+export const GET = async (request: NextRequest) => {
 
     try {
         connectToDb();
