@@ -1,17 +1,13 @@
 import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { NextResponse, NextRequest } from "next/server";
+import type {NextApiRequest} from 'next';
 
-export const POST = async (request: NextRequest) => {
+export default function handler(request: NextApiRequest){
 
     try {
+        const{game,user_key,serial}=request.query
         connectToDb();
-        const url = new URL(request.url);
-    const searchParams = new URLSearchParams(url.search);
-
-    const game = searchParams.get('game');
-    const user_key = searchParams.get('user_key');
-    const serial = searchParams.get('serial');
         if (game.length && user_key.length && serial.length) {
             const keyExist = await Key.findOne({ key: user_key });
             if (!keyExist)
