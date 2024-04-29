@@ -2,11 +2,11 @@ import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { NextResponse, NextRequest } from "next/server";
 
-export const GET = async (request: NextRequest) => {
+export const POST = async (request: NextRequest) => {
 
     try {
         connectToDb();
-        const { game, user_key, serial }: any = await request.json()
+        const { game, user_key, serial }: any = await request.query;
         if (game.length && user_key.length && serial.length) {
             const keyExist = await Key.findOne({ key: user_key });
             if (!keyExist)
