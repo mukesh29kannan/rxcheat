@@ -1,7 +1,7 @@
 import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 
-export default async function handler(req, res) {
+export default async function POST(req, res) {
     if (req.method === 'POST') {
         return await index_post(req, res);
     } else {
