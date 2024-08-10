@@ -77,6 +77,17 @@ export async function POST(request) {
         return NextResponse.json({ status: false, reason: 'Internal server error' }, { status: 500 });
     }
 }
-export async function GET(request){
-    return `<div><h1>RX CHEAT </h1></div><div><p>Telegram username : @iamhackerbgmi</p></div>`
+export async function GET() {
+    const htmlContent = `
+        <div>
+            <h1>RX CHEAT</h1>
+        </div>
+        <div>
+            <p>Telegram username: @iamhackerbgmi</p>
+        </div>
+    `;
+
+    return NextResponse.json({
+        message: 'This endpoint does not return HTML. Use a Next.js page instead.'
+    }, { status: 200 });
 }
