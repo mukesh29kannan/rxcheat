@@ -87,7 +87,9 @@ export async function GET() {
         </div>
     `;
 
-    return NextResponse.json({
-        message: 'This endpoint does not return HTML. Use a Next.js page instead.'
-    }, { status: 200 });
+    return new NextResponse(htmlContent, {
+        headers: {
+            'Content-Type': 'text/html'
+        }
+    });
 }
