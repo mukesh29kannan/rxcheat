@@ -1,6 +1,13 @@
 import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
+import { createHash } from 'crypto';
 
+const generateMD5 = (input) => {
+    const hash = createHash('md5');
+    hash.update(input);
+    return hash.digest('hex');
+  };
+  
 export const POST = async (req, res) => {
     if (req.method === 'POST') {
         return await index_post(req, res);
@@ -58,7 +65,19 @@ async function index_post(req, res) {
         if (keyExist.deviceId != sDev) {
             return res.json({ status: false, reason: 'Key already loggedin' });
         }
-        return res.json({ status: true, data: 'user key successfully' });
+        const tokenGen = generateMD5(`${game}-${user_key}-${serial}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`)
+        return res.json({ 
+             status: true,
+             data: {
+                SLOT:1,
+                EXP: tillDate,
+                modname: "rxcheat",
+                mod_status: "Safe",
+                credit:"rxcheat",
+                token: tokenGen,
+                rng: Math.floor(Date.now() / 1000)   
+             }
+            });
     }
     return res.json({ status: false, reason: 'Key is blocked' });
 }
