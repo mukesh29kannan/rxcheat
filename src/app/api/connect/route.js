@@ -44,10 +44,12 @@ export async function POST(request) {
             const now = new Date();
             const tillDate = new Date(keyExist.validity);
 
-            // if (keyExist.deviceId === '1') {
-            //     await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
-            //     return NextResponse.json({ status: true, data: 'user key successfully' });
-            // }
+            if (keyExist.deviceId === '1') {
+                await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
+            }
+            if (now > tillDate) {
+                return res.json({ status: false, reason: 'Key is expired' });
+            }
 
             if (keyExist.deviceId !== sDev) {
                 return NextResponse.json({ status: false, reason: 'Key already logged in' });
@@ -74,4 +76,7 @@ export async function POST(request) {
         console.error('API route error:', error);
         return NextResponse.json({ status: false, reason: 'Internal server error' }, { status: 500 });
     }
+}
+export async function GET(request){
+    return `<div><h1>RX CHEAT </h1></div><div><p>Telegram username : @iamhackerbgmi</p></div>`
 }
