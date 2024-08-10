@@ -2,19 +2,22 @@ import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { createHash } from 'crypto';
 import { NextResponse, NextRequest } from 'next/server';
+import { parse } from 'querystring';
 
-const generateMD5 = (input:any) => {
+const generateMD5 = (input) => {
     const hash = createHash('md5');
     hash.update(input);
     return hash.digest('hex');
 };
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
     try {
-        const req = await request.json(); // Parse JSON from request body
+        // Parse URL-encoded form data
+        const body = await request.text();
+        const req = parse(body);
         const { game, user_key: uKey, serial: sDev } = req;
 
-        const form_rules:any = {
+        const form_rules = {
             game: /^[a-zA-Z0-9_-]+$/,
             user_key: /^[a-zA-Z0-9]{1,36}$/,
             serial: /^[a-zA-Z0-9_-]+$/,
