@@ -44,10 +44,10 @@ export async function POST(request) {
             const now = new Date();
             const tillDate = new Date(keyExist.validity);
 
-            if (keyExist.deviceId === '1') {
-                await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
-                return NextResponse.json({ status: true, data: 'user key successfully' });
-            }
+            // if (keyExist.deviceId === '1') {
+            //     await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
+            //     return NextResponse.json({ status: true, data: 'user key successfully' });
+            // }
 
             if (keyExist.deviceId !== sDev) {
                 return NextResponse.json({ status: false, reason: 'Key already logged in' });
