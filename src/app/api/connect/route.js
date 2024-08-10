@@ -55,9 +55,9 @@ async function index_post(req, res) {
     if (keyExist.isActive == 1) {
         const now = new Date();
         const tillDate = new Date(keyExist.validity)
-        if (now > tillDate) {
-            return res.json({ status: false, reason: 'Key is expired' });
-        }
+        // if (now > tillDate) {
+        //     return res.json({ status: false, reason: 'Key is expired' });
+        // }
         if (keyExist.deviceId == '1') {
             await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
             return res.json({ status: true, data: 'user key successfully' });
