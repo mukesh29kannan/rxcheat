@@ -8,7 +8,7 @@ export const GET = async (request: NextRequest) => {
         await connectToDb();
 
         // Fetch data from the database
-        const keys = await Key.find({});
+        const keys = await Key.find({ validity: { $ne: null } });
 
         // Create a response with cache control headers
         const response = NextResponse.json({ status: true, data: keys });
