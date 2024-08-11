@@ -2,10 +2,8 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from 'next/navigation';
 
 export default function KeyList() {
-    const router = useRouter()
     const [data, setData] = useState([]);
 
     const getData = async () => {
@@ -22,7 +20,7 @@ export default function KeyList() {
 
     }
 
-    const apiCall = async (id: any, url: any) => {
+    const apiCall = async (id: any, url: any,message:string) => {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -30,13 +28,16 @@ export default function KeyList() {
             },
             body: JSON.stringify({ id: id })
         });
+        if(response.ok){
+            toast.success(message)
+        }
         getData()
     }
-    const block = (id: any) => {
-        apiCall(id, '/api/key/block')
+    const block = async (id: any) => {
+        await apiCall(id, '/api/key/block','Blocked sucessfully')
     }
-    const unBlock = (id: any) => {
-        apiCall(id, '/api/key/unblock')
+    const unBlock = async (id: any) => {
+        await apiCall(id, '/api/key/unblock','Unblocked sucessfully')
     }
 
 

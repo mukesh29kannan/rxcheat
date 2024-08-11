@@ -23,7 +23,7 @@ export default function NavbarComp() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
             Features
@@ -39,7 +39,7 @@ export default function NavbarComp() {
             Integrations
           </Link>
         </NavbarItem>
-      </NavbarContent>
+      </NavbarContent> */}
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
