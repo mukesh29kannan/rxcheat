@@ -10,8 +10,12 @@ export default function KeyList() {
         const timestamp = new Date().getTime();
         try {
             setLoading(true)
-            const response = await fetch(`/api/key/list?_=${timestamp}`, {
-                method: 'GET'
+            const response = await fetch(`/api/key/list`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ time: timestamp })
             });
             const data = await response.json();
             setData(data.data)
