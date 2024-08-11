@@ -5,10 +5,11 @@ import toast from "react-hot-toast";
 
 export default function KeyList() {
     const [data, setData] = useState([]);
-
+    const [loading,setLoading] = useState(false);
     const getData = async () => {
         const timestamp = new Date().getTime();
         try {
+            setLoading(true)
             const response = await fetch(`/api/key/list?_=${timestamp}`, {
                 method: 'GET'
             });
@@ -17,6 +18,8 @@ export default function KeyList() {
         } catch (err) {
             toast.error('Something went wrong')
 
+        }finally{
+            setLoading(false)
         }
 
     }
@@ -44,10 +47,10 @@ export default function KeyList() {
 
     const getStatus = (status: any, id: any) => {
         if (status == 1) {
-            return (<Button size='sm' color="danger" onClick={(e) => block(id)}>Block</Button>)
+            return (<Button size='sm' isLoading={loading} color="danger" onClick={(e) => block(id)}>Block</Button>)
         }
         else {
-            return (<Button size="sm" color="primary" onClick={(e) => unBlock(id)}>UnBlock</Button>)
+            return (<Button size="sm" isLoading={loading} color="primary" onClick={(e) => unBlock(id)}>UnBlock</Button>)
         }
     }
     const getDate = (date: any) => {
@@ -65,7 +68,7 @@ export default function KeyList() {
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody isLoading={loading}>
                 {data.map((key: any) => (
                     <TableRow key={key?._id}>
                         <TableCell>{key?.key}</TableCell>
