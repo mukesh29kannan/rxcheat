@@ -7,8 +7,9 @@ export default function KeyList() {
     const [data, setData] = useState([]);
 
     const getData = async () => {
+        const timestamp = new Date().getTime();
         try {
-            const response = await fetch('/api/key/list', {
+            const response = await fetch(`/api/key/list?_=${timestamp}`, {
                 method: 'GET'
             });
             const data = await response.json();
