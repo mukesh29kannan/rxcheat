@@ -23,7 +23,7 @@ export default function Home() {
           toast.error("😁 Unable to login")
         }
         else{
-          router.push('/dashboard');
+          toast.success("Login was success")
         }
       }
       catch (err) {

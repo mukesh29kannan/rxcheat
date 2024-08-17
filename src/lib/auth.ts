@@ -36,6 +36,7 @@ export const {
       async authorize(credentials) {
         try {
           const user = await login(credentials);
+          console.log({user})
           return user; // Return user object if successful
         } catch (error) {
           console.error("Authorization failed:", error);

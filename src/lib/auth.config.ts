@@ -2,7 +2,7 @@ import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
   pages: {
-    signIn: '/',
+    signIn: '/login',
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -11,10 +11,10 @@ export const authConfig = {
       console.log({isLoggedIn,isLogin})
       if (!isLogin) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        return false; 
       }
       return true;
-    },
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [], // Add providers with an empty array for now
