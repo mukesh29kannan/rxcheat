@@ -19,7 +19,7 @@ export default function Dashboard() {
 		Look like you're lost
 		</h3>
 		
-		<p>Nee en da inga vandha! 🤨</p>
+		<p>Nee en da inga vandha!</p>
 	</div>
 		</div>
 		</div>
