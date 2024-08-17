@@ -9,9 +9,6 @@ export default function KeyList() {
     const { data: session, status } = useSession();
     const [datas, setData] = useState([]);
     const [loading,setLoading] = useState(false);
-    useEffect(()=>{
-        console.log("session?.user?",session);
-    },[])
     const getData = async () => {
         try {
             setLoading(true)

@@ -39,11 +39,6 @@ export const { signIn, signOut } = NextAuth({
       },
     })
   ],
-  session :{
-    strategy: "database",
-    maxAge: 30 * 24 * 60 * 60,
-    updateAge: 24 * 60 * 60
-  },
   callbacks: {
     async session({ session, token, user }:any) {
       session.user = token.user
