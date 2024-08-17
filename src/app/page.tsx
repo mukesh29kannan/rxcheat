@@ -65,10 +65,10 @@ export default function Home() {
   }
   return (
     <>
-    <div className="flex justify-center items-center" >
+    <div className="flex justify-center items-center py-2" >
         <h1 className="text-3xl font-bold">RX Cheat</h1>
       </div>
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center">
       
       <div className="flex flex-col">
         <Card className="max-w-full w-[340px] h-[550px]">
