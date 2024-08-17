@@ -1,14 +1,13 @@
 "use client"
 import { handleLogin } from "@/lib/actions";
-import { Tabs, Tab, Input, Link, Button, Card, CardBody } from "@nextui-org/react";
+import { Tabs, Tab, Input, Button, Card, CardBody } from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 export default function Home() {
   const router = useRouter();
-  const [selected, setSelected] = useState<string | number>("login");
   const [loginFields, setLoginFileds] = useState({
     username: '',
     password: ''
@@ -19,11 +18,10 @@ export default function Home() {
 
   const submitLogin = async () => {
     if (loginFields.password.length && loginFields.username.length) {
-
+      toast.success("Wait pannu papom 🤔")
       try {
         setLoading(true)
           await handleLogin(loginFields) 
-          toast.success("Wait pannu papom 🤔")
           router.push('/dashboard')
       }
       catch (err) {
@@ -37,34 +35,6 @@ export default function Home() {
     }
   }
 
-  const [signinFields, setSignFileds] = useState<any>({
-    name: '',
-    username: '',
-    password: '',
-    key: '',
-    location:''
-  });
-
-  const submitSignIn = async () => {
-    Object.keys(signinFields).map((field:string ) => {
-      if (signinFields[field]?.length < 3)
-        toast.error(`Please enter the valid ${field}`);
-    })
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(signinFields)
-    });
-
-    if (!response.ok) {
-      toast.error('Unable to create user')
-    }
-    else {
-      toast.success('User created successfully')
-    }
-  }
   return (
     <>
     <div className="flex justify-center items-center py-2" >
@@ -79,8 +49,7 @@ export default function Home() {
               fullWidth
               size="md"
               aria-label="Tabs form"
-              selectedKey={selected}
-              onSelectionChange={setSelected}
+              selectedKey={"login"}
             >
               <Tab key="login" title="Login">
                 <form className="flex flex-col gap-4">
@@ -112,75 +81,9 @@ export default function Home() {
                     }
                     type={isVisible ? "text" : "password"}
                   />
-                  <p className="text-center text-small">
-                    Need to create an account?{" "}
-                    <Link size="sm" onPress={() => setSelected("sign-up")}>
-                      Sign up
-                    </Link>
-                  </p>
                   <div className="flex gap-2 justify-end">
                     <Button fullWidth color="primary" isLoading={loading} type="submit" onClick={(e: any) => { e.preventDefault(); submitLogin() }}>
                       Login
-                    </Button>
-                  </div>
-                </form>
-              </Tab>
-              <Tab key="sign-up" title="Sign up">
-                <form className="flex flex-col gap-4 h-[300px]">
-                  <Input
-                    isRequired
-                    label="Name"
-                    placeholder="Enter your name"
-                    type="text"
-                    value={signinFields.name}
-                    onChange={(e) => setSignFileds({ ...signinFields, name: e.target.value })}
-                    isInvalid={!(signinFields.name.length)}
-                  />
-                  <Input
-                    isRequired
-                    label="Username"
-                    placeholder="Enter your user name"
-                    type="text"
-                    value={signinFields.username}
-                    onChange={(e) => setSignFileds({ ...signinFields, username: e.target.value })}
-                    isInvalid={!(signinFields.username.length)}
-                  />
-                  <Input
-                    isRequired
-                    label="Password"
-                    placeholder="Enter your password"
-                    type="password"
-                    value={signinFields.password}
-                    onChange={(e) => setSignFileds({ ...signinFields, password: e.target.value })}
-                    isInvalid={!(signinFields.password.length)}
-                  />
-                  <Input
-                    isRequired
-                    label="Key"
-                    placeholder="Enter your key"
-                    type="password"
-                    value={signinFields.key}
-                    onChange={(e) => setSignFileds({ ...signinFields, key: e.target.value })}
-                    isInvalid={!(signinFields.key.length)}
-                  />
-                  <Input
-                    isRequired
-                    label="Location"
-                    placeholder="Enter your location"
-                    type="text"
-                    value={signinFields.location}
-                    onChange={(e) => setSignFileds({ ...signinFields, location: e.target.value })}
-                    isInvalid={!(signinFields.location.length)}
-                  />
-                  <p className="text-center text-small">
-                    Already have an account?{" "}
-                    <Link size="sm" onPress={() => setSelected("login")}>
-                      Login
-                    </Link>
-                  </p>
-                  <div className="flex gap-2 justify-end">
-                    <Button fullWidth color="primary" isDisabled={signinFields.location != 'gokul'} type="submit" onClick={(e) => { e.preventDefault(); submitSignIn() }}>
-                      Sign up
                     </Button>
                   </div>
                 </form>

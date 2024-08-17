@@ -35,7 +35,7 @@ const keySchema = new mongoose.Schema(
     },
     validity:{
       type: Date,
-      required: true,
+      required: false,
     },
     isActive:{
       type:Number,
@@ -44,6 +44,14 @@ const keySchema = new mongoose.Schema(
     deviceId:{
       type: String,
       required:true
+    },
+    period:{
+      type:Number,
+      required:true
+    },
+    createdBy:{
+      type:String,
+      required: true,
     }
   },
   { timestamps: true }

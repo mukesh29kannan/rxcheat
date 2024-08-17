@@ -41,13 +41,17 @@ export async function POST(request) {
         }
 
         if (keyExist.isActive === 1) {
-            const now = new Date();
-            const tillDate = new Date(keyExist.validity);
-
             if (keyExist.deviceId === '1') {
                 await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
             }
-            if (now > tillDate) {
+            if(!keyExist.validity){
+                const futureDate = new Date();
+                futureDate.setDate(futureDate.getDate() + parseInt(keyExist.period));
+                await Key.findByIdAndUpdate(keyExist._id, { validity: futureDate });
+            }
+            const now = new Date();
+            const tillDate = new Date(keyExist.validity);
+            if (keyExist.validity &&  now > tillDate) {
                 return res.json({ status: false, reason: 'Key is expired' });
             }
 

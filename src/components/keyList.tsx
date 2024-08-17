@@ -3,12 +3,13 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeleteKey from "./deleteKey";
+import { useSession } from "next-auth/react";
 
 export default function KeyList() {
+    const { data: session } = useSession();
     const [data, setData] = useState([]);
     const [loading,setLoading] = useState(false);
     const getData = async () => {
-        const timestamp = new Date().getTime();
         try {
             setLoading(true)
             const response = await fetch(`/api/key/list`, {
@@ -16,7 +17,7 @@ export default function KeyList() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ time: timestamp })
+                body: JSON.stringify({ user_id: session?.user?.id })
             });
             const data = await response.json();
             setData(data.data)
@@ -58,6 +59,9 @@ export default function KeyList() {
             return (<Button size="sm" isLoading={loading} color="primary" onClick={(e) => unBlock(id)}>UnBlock</Button>)
         }
     }
+
+    const getFreshStatus = (validity:any) => <p>{validity == null ? 'Used' : 'Fresh' }</p>
+
     const getDate = (date: any) => {
         const dateObject = new Date(date);
         return (`${dateObject.getDate()}-${dateObject.getMonth()}-${dateObject.getFullYear()} & ${dateObject.getHours()}:${dateObject.getMinutes()}`)
@@ -73,6 +77,7 @@ export default function KeyList() {
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
                 <TableColumn>Delete</TableColumn>
+                <TableColumn>FRESH STATUS</TableColumn>
             </TableHeader>
             <TableBody isLoading={loading}>
                 {data.map((key: any) => (
@@ -82,6 +87,7 @@ export default function KeyList() {
                         <TableCell>{getDate(key?.createdAt)}</TableCell>
                         <TableCell>{getStatus(key?.isActive, key?._id)}</TableCell>
                         <TableCell><DeleteKey keys={key}/></TableCell>
+                        <TableCell>{getFreshStatus(key?.period)}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

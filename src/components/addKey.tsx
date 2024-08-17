@@ -3,11 +3,12 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function AddKey() {
     const router=useRouter();
+    const { data: session } = useSession();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [modalPlacement, setModalPlacement] = useState<any>("auto");
     const [keyFields, setKeyFields] = useState({
         key: '',
         period: ''
@@ -28,9 +29,8 @@ export default function AddKey() {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(keyFields)
+                body: JSON.stringify({...keyFields,user_id: session?.user?.id})
               });
-          
               if (!response.ok) {
                 toast.error('Key already exists')
               }

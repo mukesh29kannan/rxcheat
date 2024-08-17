@@ -6,10 +6,9 @@ export const POST = async (request: NextRequest) => {
     try {
         // Connect to the database
         await connectToDb();
-        const { time }: any = await request.json()
-        const val = time ? null : null;
+        const { user_id }: any = await request.json()
         // Fetch data from the database
-        const keys = await Key.find({ validity: { $ne: val } });
+        const keys = await Key.find({ createdBy: user_id });
 
         // Create a response with cache control headers
         const response = NextResponse.json({ status: true, data: keys });
