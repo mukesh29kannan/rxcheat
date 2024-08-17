@@ -14,19 +14,22 @@ export default function Home() {
     password: ''
   });
   const [isVisible, setIsVisible] = useState(false);
-
+  const [loading,setLoading] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const submitLogin = async () => {
     if (loginFields.password.length && loginFields.username.length) {
 
       try {
-          await handleLogin(loginFields)
-          toast.success("Login was success")
+        setLoading(true)
+          await handleLogin(loginFields) 
+          toast.success("Wait pannu papom 🤔")
           router.push('/dashboard')
       }
       catch (err) {
         toast.error("😁 Unable to login")
+      }finally{
+        setLoading(false)
       }
     }
     else {
@@ -116,7 +119,7 @@ export default function Home() {
                     </Link>
                   </p>
                   <div className="flex gap-2 justify-end">
-                    <Button fullWidth color="primary" type="submit" onClick={(e: any) => { e.preventDefault(); submitLogin() }}>
+                    <Button fullWidth color="primary" loading={loading} type="submit" onClick={(e: any) => { e.preventDefault(); submitLogin() }}>
                       Login
                     </Button>
                   </div>
