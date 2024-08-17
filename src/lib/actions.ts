@@ -10,12 +10,13 @@ export const handleLogin = async (credentials: any) => {
   "use server"; // Indicates server-side execution
 
   try {
+    console.log("came to handlelogin")
     // Perform the sign-in operation
     const result:any = await signIn('credentials', {
       redirect: false, // Prevent automatic redirection
       ...credentials
     });
-
+    console.log("handle login result",result)
     // Check the result object to determine the outcome
     if (result?.error) {
       console.error("Login failed:", result.error);

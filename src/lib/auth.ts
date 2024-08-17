@@ -11,11 +11,12 @@ const login = async (credentials: any) => {
     await connectToDb(); // Ensure connection is established
 
     const user = await User.findOne({ username: credentials.username });
+    console.log("user",user)
     if (!user) throw new Error("Incorrect username or password.");
 
     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
     if (!isPasswordCorrect) throw new Error("Incorrect username or password.");
-
+    console.log("validation sucesss")
     return user;
   } catch (error) {
     console.error("Login failed:", error);
@@ -36,8 +37,10 @@ export const {
       async authorize(credentials) {
         try {
           const user = await login(credentials);
+          console.log("so the user is ",user)
           return user; // Return user object if successful
         } catch (error) {
+          console.log("so the error is",error)
           console.error("Authorization failed:", error);
           return null; // Return null if authentication fails
         }
