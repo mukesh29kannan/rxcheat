@@ -19,7 +19,7 @@ export default function Home() {
 
       try {
         const response: any = await handleLogin(loginFields)
-        if(!response.ok){
+        if(!response.status){
           toast.error("😁 Unable to login")
         }
         else{
