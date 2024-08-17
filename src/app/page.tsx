@@ -65,6 +65,9 @@ export default function Home() {
   }
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <div>
+        <h1>RX Cheat</h1>
+      </div>
       <div className="flex flex-col">
         <Card className="max-w-full w-[340px] h-[550px]">
           <CardBody className="overflow-hidden">
