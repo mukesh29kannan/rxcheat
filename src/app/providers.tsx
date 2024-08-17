@@ -5,11 +5,11 @@ import NavbarComp from "@/components/Navbar";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 
-export default function Providers({ children,pageProps: { session, ...pageProps } }: any) {
+export default function Providers({ children }: any) {
     const pathname = usePathname();
     return (
         <NextUIProvider>
-            <SessionProvider session={session}>
+            <SessionProvider>
             {pathname != '/' && <NavbarComp />}
                 {children}
             <Toaster />
