@@ -4,8 +4,8 @@ import { Tabs, Tab, Input, Link, Button, Card, CardBody } from "@nextui-org/reac
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-
+import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { EyeFilledIcon } from "./EyeSlashFilledIcon";
 export default function Home() {
   const router = useRouter();
   const [selected, setSelected] = useState<string | number>("login");
@@ -13,18 +13,16 @@ export default function Home() {
     username: '',
     password: ''
   });
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   const submitLogin = async () => {
     if (loginFields.password.length && loginFields.username.length) {
 
       try {
-        const response: any = await handleLogin(loginFields)
-        if(!response.status){
-          toast.error("😁 Unable to login")
-        }
-        else{
+          await handleLogin(loginFields)
           toast.success("Login was success")
-        }
       }
       catch (err) {
         toast.error("😁 Unable to login")
@@ -96,10 +94,19 @@ export default function Home() {
                     isRequired
                     label="Password"
                     placeholder="Enter your password"
-                    type="password"
                     value={loginFields.password}
                     onChange={(e) => setLoginFileds({ ...loginFields, password: e.target.value })}
                     isInvalid={!(loginFields.password.length)}
+                    endContent={
+                      <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                        {isVisible ? (
+                          <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                        ) : (
+                          <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                        )}
+                      </button>
+                    }
+                    type={isVisible ? "text" : "password"}
                   />
                   <p className="text-center text-small">
                     Need to create an account?{" "}
