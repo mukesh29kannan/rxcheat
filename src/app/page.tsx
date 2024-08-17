@@ -64,10 +64,12 @@ export default function Home() {
     }
   }
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div>
-        <h1>RX Cheat</h1>
+    <>
+    <div className="flex justify-center items-center" >
+        <h1 className="text-3xl font-bold">RX Cheat</h1>
       </div>
+    <div className="flex justify-center items-center min-h-screen">
+      
       <div className="flex flex-col">
         <Card className="max-w-full w-[340px] h-[550px]">
           <CardBody className="overflow-hidden">
@@ -177,6 +179,7 @@ export default function Home() {
         </Card>
       </div>
     </div >
+    </>
   );
 }
 
