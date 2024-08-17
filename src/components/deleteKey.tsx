@@ -3,7 +3,7 @@ import {useRouter} from "next/navigation";
 import { useState } from "react"
 import toast from "react-hot-toast";
 
-export default function DeleteKey(key:any){
+export default function DeleteKey({keys}:any){
     const router=useRouter();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [confirmText,setConfirmText] = useState('');
@@ -14,7 +14,7 @@ export default function DeleteKey(key:any){
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id : key?._id
+                id : keys?._id
             })
           });
       
@@ -33,7 +33,7 @@ export default function DeleteKey(key:any){
             <ModalContent>
             {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Delete {key?.key}</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Delete {keys?.key}</ModalHeader>
                             <ModalBody>
                                 <Input
                                     isRequired

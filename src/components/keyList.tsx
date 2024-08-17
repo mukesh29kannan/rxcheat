@@ -81,7 +81,7 @@ export default function KeyList() {
                         <TableCell>{getDate(key?.validity)}</TableCell>
                         <TableCell>{getDate(key?.createdAt)}</TableCell>
                         <TableCell>{getStatus(key?.isActive, key?._id)}</TableCell>
-                        <TableCell><DeleteKey key={key}/></TableCell>
+                        <TableCell><DeleteKey keys={key}/></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
