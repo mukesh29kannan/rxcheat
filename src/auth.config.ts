@@ -8,18 +8,17 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       // Check if the user is authenticated
       const isLoggedIn = !!auth?.user;
-      // Initialize protected routes
-      // Here, all routes except the login page is protected
-      const isOnProtected = !(nextUrl.pathname.startsWith('/login'));
-      
-      if (isOnProtected) {
-        if (isLoggedIn) return true;
-        return false; // redirect to /login
-      } else if (isLoggedIn) {
-        // redirected to homepage
-        return Response.redirect(new URL('/dashboard', nextUrl));
+      const isOnLoginPage = nextUrl.pathname == '/';
+      console.log("auth user",auth?.user)
+      console.log({isLoggedIn,isOnLoginPage})
+      if(isOnLoginPage){
+        if(isLoggedIn) return Response.redirect(new URL('/dashboard', nextUrl));
+        return true;
       }
-      return true;
+      else{
+        if(isLoggedIn) return true;
+        return false;
+      }
     },
   },
   providers: [], // Add providers with an empty array for now
