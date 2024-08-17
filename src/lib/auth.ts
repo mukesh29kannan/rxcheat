@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDb } from "./utils";
 import { User } from "./models";
 import bcrypt from "bcryptjs";
-import { authConfig } from "./auth.config";
 
 // Login function with improved error handling
 const login = async (credentials: any) => {
@@ -11,12 +10,11 @@ const login = async (credentials: any) => {
     await connectToDb(); // Ensure connection is established
 
     const user = await User.findOne({ username: credentials.username });
-    console.log("user",user)
     if (!user) throw new Error("Incorrect username or password.");
 
     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
     if (!isPasswordCorrect) throw new Error("Incorrect username or password.");
-    console.log("validation sucesss")
+
     return user;
   } catch (error) {
     console.error("Login failed:", error);
@@ -25,22 +23,14 @@ const login = async (credentials: any) => {
 };
 
 // NextAuth configuration
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
-  ...authConfig,
+export default NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
         try {
           const user = await login(credentials);
-          console.log("so the user is ",user)
           return user; // Return user object if successful
         } catch (error) {
-          console.log("so the error is",error)
           console.error("Authorization failed:", error);
           return null; // Return null if authentication fails
         }
@@ -48,6 +38,16 @@ export const {
     }),
   ],
   callbacks: {
-    ...authConfig.callbacks,
+    async jwt({ token, user }: any) {
+      if (user) token.id = user.id;
+      return token;
+    },
+    async session({ session, token }: any) {
+      if (token) session.user.id = token.id;
+      return session;
+    }
+  },
+  pages: {
+    signIn: '/', 
   },
 });
