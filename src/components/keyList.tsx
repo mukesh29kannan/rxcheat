@@ -6,9 +6,12 @@ import DeleteKey from "./deleteKey";
 import { useSession } from "next-auth/react";
 
 export default function KeyList() {
-    const { data: session } = useSession();
-    const [data, setData] = useState([]);
+    const { data: session, status } = useSession();
+    const [datas, setData] = useState([]);
     const [loading,setLoading] = useState(false);
+    useEffect(()=>{
+        console.log("session?.user?",session?.user);
+    },[data])
     const getData = async () => {
         try {
             setLoading(true)
@@ -19,8 +22,8 @@ export default function KeyList() {
                 },
                 body: JSON.stringify({ user_id: session?.user?.id })
             });
-            const data = await response.json();
-            setData(data.data)
+            const d = await response.json();
+            setData(d.data)
         } catch (err) {
             toast.error('Something went wrong')
 
@@ -80,7 +83,7 @@ export default function KeyList() {
                 <TableColumn>FRESH STATUS</TableColumn>
             </TableHeader>
             <TableBody isLoading={loading}>
-                {data.map((key: any) => (
+                {datas.map((key: any) => (
                     <TableRow key={key?._id}>
                         <TableCell>{key?.key}</TableCell>
                         <TableCell>{getDate(key?.validity)}</TableCell>

@@ -2,7 +2,11 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
 import { useState } from "react";
 import { handleLogout } from "@/lib/actions";
+import { useSession } from "next-auth/react";
+
 export default function NavbarComp() {
+  const { data: session, status } = useSession();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -46,7 +50,7 @@ export default function NavbarComp() {
         </NavbarItem> */}
         <NavbarItem>
           <Button color="primary" onClick={(e)=>handleLogout()} variant="flat">
-            Log out
+            Log out {session?.user?.name}
           </Button>
         </NavbarItem>
       </NavbarContent>
