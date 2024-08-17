@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDb } from "./utils";
 import { User } from "./models";
 import bcrypt from "bcryptjs";
+import { authConfig } from './auth.config';
 
 // Login function with improved error handling
 const login = async (credentials: any) => {
@@ -23,7 +24,13 @@ const login = async (credentials: any) => {
 };
 
 // NextAuth configuration
-export default NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} =  NextAuth({
+  ...authConfig,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -37,17 +44,4 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }: any) {
-      if (user) token.id = user.id;
-      return token;
-    },
-    async session({ session, token }: any) {
-      if (token) session.user.id = token.id;
-      return session;
-    }
-  },
-  pages: {
-    signIn: '/', 
-  },
 });
