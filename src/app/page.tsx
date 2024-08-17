@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
-import { EyeFilledIcon } from "./EyeSlashFilledIcon";
+import { EyeFilledIcon } from "./EyeFilledIcon";
 export default function Home() {
   const router = useRouter();
   const [selected, setSelected] = useState<string | number>("login");
