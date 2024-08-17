@@ -23,6 +23,7 @@ export default function Home() {
       try {
           await handleLogin(loginFields)
           toast.success("Login was success")
+          router.push('/dashboard')
       }
       catch (err) {
         toast.error("😁 Unable to login")
