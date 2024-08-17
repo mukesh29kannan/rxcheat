@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col">
-        <Card className="max-w-full w-[340px] h-[450px]">
+        <Card className="max-w-full w-[340px] h-[550px]">
           <CardBody className="overflow-hidden">
             <Tabs
               fullWidth
@@ -154,6 +154,7 @@ export default function Home() {
                     type="text"
                     value={signinFields.location}
                     onChange={(e) => setSignFileds({ ...signinFields, location: e.target.value })}
+                    isInvalid={!(signinFields.location.length)}
                   />
                   <p className="text-center text-small">
                     Already have an account?{" "}
