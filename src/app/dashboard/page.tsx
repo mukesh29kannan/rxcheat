@@ -16,10 +16,8 @@ export default function Dashboard() {
 		
 		<div className="contant_box_404">
 		<h3 className="h2">
-		Look like you're lost
+		Nee en da inga vandha! 🤨
 		</h3>
-		
-		<p>Nee en da inga vandha!</p>
 	</div>
 		</div>
 		</div>
