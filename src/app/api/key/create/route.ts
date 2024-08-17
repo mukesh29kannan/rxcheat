@@ -6,7 +6,7 @@ export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
-    const { key, period,user_id }: any = await request.json()
+    const { key, period }: any = await request.json()
     if (key.length && period.length) {
       const keyExist = await Key.findOne({ key: key });
       if (keyExist){
@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
         isActive: 1,
         period: period,
         deviceId: '1',
-        createdBy: user_id
+        createdBy: null
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
