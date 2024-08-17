@@ -1,5 +1,5 @@
 'use server'
-import { signIn, signOut } from "./auth";
+import { signIn, signOut } from "../auth";
 
 export const handleLogout = async () => {
     "use server";
@@ -16,13 +16,6 @@ export const handleLogin = async (credentials: any) => {
       redirect: false, // Prevent automatic redirection
       ...credentials
     });
-    console.log("handle login result",result)
-    // Check the result object to determine the outcome
-    if (result?.error) {
-      console.error("Login failed:", result.error);
-      return { error: result.error };
-    }
-      return { status: true }; // Login successful
 
     return { error: "Unexpected error occurred." }; // Handle unexpected cases
   } catch (err) {
