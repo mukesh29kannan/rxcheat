@@ -119,7 +119,7 @@ export default function Home() {
                     </Link>
                   </p>
                   <div className="flex gap-2 justify-end">
-                    <Button fullWidth color="primary" loading={loading} type="submit" onClick={(e: any) => { e.preventDefault(); submitLogin() }}>
+                    <Button fullWidth color="primary" isLoading={loading} type="submit" onClick={(e: any) => { e.preventDefault(); submitLogin() }}>
                       Login
                     </Button>
                   </div>
