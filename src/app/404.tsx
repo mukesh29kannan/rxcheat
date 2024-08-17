@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Custom404 = () => {
+export default function Custom404() {
   return (
     <div style={{ textAlign: 'center', padding: '50px' }}>
       <h1 style={{ fontSize: '4rem' }}>404 - Page Not Found</h1>
@@ -9,5 +9,3 @@ const Custom404 = () => {
     </div>
   );
 };
-
-export default Custom404;
