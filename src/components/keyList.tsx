@@ -2,6 +2,7 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import DeleteKey from "./deleteKey";
 
 export default function KeyList() {
     const [data, setData] = useState([]);
@@ -71,6 +72,7 @@ export default function KeyList() {
                 <TableColumn>VALIDITY TILL </TableColumn>
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
+                <TableColumn>Delete</TableColumn>
             </TableHeader>
             <TableBody isLoading={loading}>
                 {data.map((key: any) => (
@@ -79,6 +81,7 @@ export default function KeyList() {
                         <TableCell>{getDate(key?.validity)}</TableCell>
                         <TableCell>{getDate(key?.createdAt)}</TableCell>
                         <TableCell>{getStatus(key?.isActive, key?._id)}</TableCell>
+                        <TableCell><DeleteKey key={key}/></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
