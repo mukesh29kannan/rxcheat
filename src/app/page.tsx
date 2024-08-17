@@ -19,14 +19,19 @@ export default function Home() {
 
       try {
         const response: any = await handleLogin(loginFields)
-        router.push('/dashboard');
+        if(!response.ok){
+          toast.error("😁 Unable to login")
+        }
+        else{
+          router.push('/dashboard');
+        }
       }
       catch (err) {
-        toast.error("Unable to login")
+        toast.error("😁 Unable to login")
       }
     }
     else {
-      toast.error("please enter all the required fields")
+      toast.error("😁 please enter all the required fields")
     }
   }
 
@@ -34,7 +39,8 @@ export default function Home() {
     name: '',
     username: '',
     password: '',
-    key: ''
+    key: '',
+    location:''
   });
 
   const submitSignIn = async () => {
@@ -141,6 +147,14 @@ export default function Home() {
                     onChange={(e) => setSignFileds({ ...signinFields, key: e.target.value })}
                     isInvalid={!(signinFields.key.length)}
                   />
+                  <Input
+                    isRequired
+                    label="Location"
+                    placeholder="Enter your location"
+                    type="text"
+                    value={signinFields.location}
+                    onChange={(e) => setSignFileds({ ...signinFields, location: e.target.value })}
+                  />
                   <p className="text-center text-small">
                     Already have an account?{" "}
                     <Link size="sm" onPress={() => setSelected("login")}>
@@ -148,7 +162,7 @@ export default function Home() {
                     </Link>
                   </p>
                   <div className="flex gap-2 justify-end">
-                    <Button fullWidth color="primary" type="submit" onClick={(e) => { e.preventDefault(); submitSignIn() }}>
+                    <Button fullWidth color="primary" isDisabled={signinFields.location != 'gokul'} type="submit" onClick={(e) => { e.preventDefault(); submitSignIn() }}>
                       Sign up
                     </Button>
                   </div>

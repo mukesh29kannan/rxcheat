@@ -41,9 +41,9 @@ export default function NavbarComp() {
         </NavbarItem>
       </NavbarContent> */}
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+        {/* <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem>
           <Button color="primary" onClick={(e)=>handleLogout()} variant="flat">
             Log out
