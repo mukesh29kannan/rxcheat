@@ -15,9 +15,9 @@ export default function Dashboard() {
 		</div>
 		
 		<div className="contant_box_404">
-		<h3 className="h2">
+		<2 className="h2">
 		Nee en da inga vandha! 🤨
-		</h3>
+		</2>
 	</div>
 		</div>
 		</div>
