@@ -7,6 +7,7 @@ export const POST = async (request: NextRequest) => {
   try {
     connectToDb();
     const { key, period,user_id }: any = await request.json()
+    console.log({ key, period,user_id })
     if (key.length && period.length && user_id.length) {
       const keyExist = await Key.findOne({ key: key });
       if (keyExist){
