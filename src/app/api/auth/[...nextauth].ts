@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import { authConfig } from '@/auth.config';
 import Credentials from 'next-auth/providers/credentials';
-import { connectToDb } from "./lib/utils";
-import { User } from "./lib/models";
+import { connectToDb } from "@/lib/utils";
+import { User } from "@/lib/models";
 import bcrypt from "bcryptjs";
 
 // Login function with improved error handling
