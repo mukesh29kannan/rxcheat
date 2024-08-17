@@ -22,10 +22,7 @@ export const handleLogin = async (credentials: any) => {
       console.error("Login failed:", result.error);
       return { error: result.error };
     }
-
-    if (result?.ok) {
       return { status: true }; // Login successful
-    }
 
     return { error: "Unexpected error occurred." }; // Handle unexpected cases
   } catch (err) {
