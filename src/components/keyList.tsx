@@ -75,7 +75,7 @@ export default function KeyList() {
         getData();
     }, [])
     return (
-        <Table layout="auto" aria-label="Example static collection table">
+        <Table layout="auto" aria-label="Keys List Table">
             <TableHeader>
                 <TableColumn>GENERATED KEY</TableColumn>
                 <TableColumn>CREATED AT</TableColumn>

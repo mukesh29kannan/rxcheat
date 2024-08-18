@@ -34,8 +34,8 @@ export default function AddKey() {
               }
               else {
                 toast.success('Key created successfully')
-                router.refresh()
               }
+              router.refresh()
         }
         else{
             toast.error('Unable to create key')
