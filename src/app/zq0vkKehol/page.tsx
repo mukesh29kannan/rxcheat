@@ -116,8 +116,8 @@ export default function UsersList(){
                             <TableColumn>NAME</TableColumn>
                             <TableColumn>USERNAME</TableColumn>
                             {/* <TableColumn>KEY</TableColumn> */}
-                            <TableColumn>NO KEYS</TableColumn>
                             <TableColumn>STATUS</TableColumn>
+                            <TableColumn>NO KEYS</TableColumn>
                             <TableColumn>ACTION</TableColumn>
                         </TableHeader>
                         <TableBody isLoading={loading} emptyContent={"No keys to display."}>
