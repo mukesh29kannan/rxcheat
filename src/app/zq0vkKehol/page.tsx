@@ -1,6 +1,7 @@
 "use client"
 
 import DeleteUser from "@/components/DeleteUser";
+import DeleteUserKeys from "@/components/DeleteUserKeys";
 import { Button, Chip, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react";
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
@@ -133,6 +134,7 @@ export default function UsersList(){
                                                 <div className="relative flex items-center ">
                                                     {getBlockStatus(user?.isActive, user?._id)}
                                                     <DeleteUser keys={user} />
+                                                    <DeleteUserKeys keys={user} />
                                                 </div>
                                             </TableCell>
                                         </TableRow>
