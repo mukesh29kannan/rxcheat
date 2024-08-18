@@ -1,14 +1,15 @@
 'use client'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Chip, Tooltip } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeleteKey from "./deleteKey";
-import { useSession } from "next-auth/react";
+import { MdBlock } from "react-icons/md";
+import { CgUnblock } from "react-icons/cg";
 
 export default function KeyList() {
-    const { data: session, status } = useSession();
     const [datas, setData] = useState([]);
-    const [loading,setLoading] = useState(false);
+    const [loading,setLoading] = useState(true);
+    const [users,setUsers] = useState<any>([]);
     const getData = async () => {
         try {
             setLoading(true)
@@ -17,10 +18,11 @@ export default function KeyList() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ user_id: session?.user?.id })
+                body: JSON.stringify({ user_id: 1 })
             });
             const d = await response.json();
-            setData(d.data)
+            setData(d.data.keys)
+            setUsers(d.data.user)
         } catch (err) {
             toast.error('Something went wrong')
 
@@ -53,19 +55,22 @@ export default function KeyList() {
 
     const getStatus = (status: any, id: any) => {
         if (status == 1) {
-            return (<Button size='sm' isLoading={loading} color="danger" onClick={(e) => block(id)}>Block</Button>)
+            return (<Tooltip content="Block Key"><Button isIconOnly className="bg-transparent" isLoading={loading} onClick={(e) => block(id)}><span className="text-lg text-warning bg-transparent cursor-pointer active:opacity-50"><MdBlock/></span></Button></Tooltip>)
         }
         else {
-            return (<Button size="sm" isLoading={loading} color="primary" onClick={(e) => unBlock(id)}>UnBlock</Button>)
+            return (<Tooltip content="Unblock Key"><Button isIconOnly className="bg-transparent" isLoading={loading} onClick={(e) => unBlock(id)}><span className="text-lg text-primary bg-transparent cursor-pointer active:opacity-50"><CgUnblock/></span></Button></Tooltip>)
         }
     }
 
-    const getFreshStatus = (validity:any) => <p>{validity == null ? 'Used' : 'Fresh' }</p>
-
+    const getFreshStatus = (validity:any) =><Chip className="capitalize" color={!validity ? 'primary' : 'success'} size="sm" variant="flat">
+            {!validity ? 'fresh' : 'used'}
+        </Chip>
     const getDate = (date: any) => {
+        if(!date) return "-"
         const dateObject = new Date(date);
         return (`${dateObject.getDate()}-${dateObject.getMonth()}-${dateObject.getFullYear()} & ${dateObject.getHours()}:${dateObject.getMinutes()}`)
     }
+    const getUserName = (id:string) => users.find((user:any)=>user._id == id)?.name
     useEffect(() => {
         getData();
     }, [])
@@ -73,21 +78,28 @@ export default function KeyList() {
         <Table layout="auto" aria-label="Example static collection table">
             <TableHeader>
                 <TableColumn>GENERATED KEY</TableColumn>
-                <TableColumn>VALIDITY TILL </TableColumn>
                 <TableColumn>CREATED AT</TableColumn>
+                <TableColumn>EXPIRE AT</TableColumn>
+                <TableColumn>VALIDITY</TableColumn>
+                <TableColumn>CREATED BY</TableColumn>
                 <TableColumn>STATUS</TableColumn>
-                <TableColumn>Delete</TableColumn>
-                <TableColumn>FRESH STATUS</TableColumn>
+                <TableColumn>ACTIONS</TableColumn>
             </TableHeader>
-            <TableBody isLoading={loading}>
+            <TableBody isLoading={loading} emptyContent={"No keys to display."}>
                 {datas.map((key: any) => (
                     <TableRow key={key?._id}>
                         <TableCell>{key?.key}</TableCell>
-                        <TableCell>{getDate(key?.validity)}</TableCell>
                         <TableCell>{getDate(key?.createdAt)}</TableCell>
-                        <TableCell>{getStatus(key?.isActive, key?._id)}</TableCell>
-                        <TableCell><DeleteKey keys={key}/></TableCell>
-                        <TableCell>{getFreshStatus(key?.period)}</TableCell>
+                        <TableCell>{getDate(key?.validity)}</TableCell>
+                        <TableCell>{key?.period}</TableCell>
+                        <TableCell>{getUserName(key?.createdBy)}</TableCell>
+                        <TableCell>{getFreshStatus(key?.validity)}</TableCell>
+                        <TableCell>
+                            <div className="relative flex items-center ">
+                                <DeleteKey keys={key}/>
+                                {getStatus(key?.isActive, key?._id)}
+                            </div>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

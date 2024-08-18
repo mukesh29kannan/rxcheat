@@ -2,7 +2,7 @@ import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
   pages: {
-    signIn: '/login',
+    signIn: '/',
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -19,6 +19,16 @@ export const authConfig = {
         if(isLoggedIn) return true;
         return false;
       }
+    },
+    async session({ session, token, user }:any) {
+      session.user = token.user
+      return session;
+    },
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
     },
   },
   secret: 'JlMBJj5ZjFV5OI1CIIJqmRCQYH1JW2pB',

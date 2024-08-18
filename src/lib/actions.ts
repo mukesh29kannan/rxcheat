@@ -1,5 +1,5 @@
 'use server'
-import { signIn, signOut } from "@/app/api/auth/[...nextauth]";
+import { signIn, signOut } from "@/auth";
 
 export const handleLogout = async () => {
     "use server";

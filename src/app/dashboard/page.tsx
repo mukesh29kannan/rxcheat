@@ -1,7 +1,5 @@
 import './page.css'
-
 export default function Dashboard() {
-
     return (
         <section className="page_404">
 			<div className="container">

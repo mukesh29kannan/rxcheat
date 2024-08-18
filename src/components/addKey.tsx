@@ -67,7 +67,7 @@ export default function AddKey() {
                                 <Select
                                     label="Time Period"
                                     placeholder="Select an validity"
-                                    className="max-w-xs"
+                                    className="max-w"
                                     onChange={(e)=>setKeyFields({...keyFields,period:e.target.value})}
                                 >
                                     {periods.map((period) => (

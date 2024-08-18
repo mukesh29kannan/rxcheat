@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     key:{
       type: String,
       required:true
-    }
+    },
   },
   { timestamps: true }
 );
@@ -49,9 +49,9 @@ const keySchema = new mongoose.Schema(
       type:Number,
       required:true
     },
-    createdBy:{
-      type:String,
-      required: true,
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     }
   },
   { timestamps: true }

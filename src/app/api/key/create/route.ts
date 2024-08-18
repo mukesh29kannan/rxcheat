@@ -1,16 +1,21 @@
 import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { NextResponse, NextRequest } from "next/server";
+import { auth } from "@/auth";
 
 export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
     const { key, period }: any = await request.json()
+    const session:any = await auth();
+    if(!session?.user) return NextResponse.json({ status: false, message: 'Who are you' });
+    const userId = session?.user?._id
+
     if (key.length && period.length) {
       const keyExist = await Key.findOne({ key: key });
       if (keyExist){
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+        return NextResponse.json({ error: 'Key already exists' }, { status: 409 })
       }
       
       const keys = await Key.create({
@@ -18,7 +23,7 @@ export const POST = async (request: NextRequest) => {
         isActive: 1,
         period: period,
         deviceId: '1',
-        createdBy: null
+        createdBy: userId
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }

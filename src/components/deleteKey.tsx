@@ -1,7 +1,8 @@
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react"
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useDisclosure } from "@nextui-org/react"
 import {useRouter} from "next/navigation";
 import { useState } from "react"
 import toast from "react-hot-toast";
+import { DeleteIcon } from "./DeleteIcon";
 
 export default function DeleteKey({keys}:any){
     const router=useRouter();
@@ -28,7 +29,7 @@ export default function DeleteKey({keys}:any){
     }
     return (
         <>
-        <Button size='sm' color="danger" onPress={onOpen} >Delete</Button>
+        <Tooltip content="Delete Key"><Button isIconOnly className="bg-transparent" onPress={onOpen} ><span className="text-lg text-danger bg-transparent cursor-pointer active:opacity-50"><DeleteIcon/></span></Button></Tooltip>
         <Modal isOpen={isOpen} placement={'auto'} onOpenChange={onOpenChange} >
             <ModalContent>
             {(onClose) => (

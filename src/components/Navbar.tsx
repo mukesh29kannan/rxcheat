@@ -1,27 +1,24 @@
 "use client"
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
-import { useState } from "react";
+import {  useState } from "react";
 import { handleLogout } from "@/lib/actions";
-import { useSession } from "next-auth/react";
-
 export default function NavbarComp() {
-  const { data: session, status } = useSession();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     "Dashboard",
-    "Users",
     "Log Out",
   ];
+
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
-        <NavbarMenuToggle
+        {/* <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
-        />
+        /> */}
         <NavbarBrand>
           <p className="font-bold text-inherit">RX Cheat</p>
         </NavbarBrand>
@@ -50,7 +47,7 @@ export default function NavbarComp() {
         </NavbarItem> */}
         <NavbarItem>
           <Button color="primary" onClick={(e)=>handleLogout()} variant="flat">
-            Log out {session?.user?.name}
+            Log out
           </Button>
         </NavbarItem>
       </NavbarContent>
