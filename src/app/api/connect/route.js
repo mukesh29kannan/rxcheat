@@ -57,10 +57,6 @@ export async function POST(request) {
                 return res.json({ status: false, reason: 'Key is expired' });
             }
 
-            if (keyExist.deviceId !== sDev) {
-                return NextResponse.json({ status: false, reason: 'Key already logged in' });
-            }
-
             const tokenGen = generateMD5(`${game}-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             return NextResponse.json({
                 status: true,
