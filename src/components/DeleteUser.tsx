@@ -15,15 +15,15 @@ export default function DeleteUser({keys}:any){
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id : keys?._id
+                user_id : keys?._id
             })
           });
       
           if (!response.ok) {
-            toast.error('Unable to delete the key')
+            toast.error('Unable to delete the user')
           }
           else {
-            toast.success('Key deleted successfully')
+            toast.success('User deleted successfully')
             router.refresh()
           }
     }
@@ -46,7 +46,7 @@ export default function DeleteUser({keys}:any){
                                 />  
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" type="submit" isDisabled={ confirmText != keys?.name} onClick={(e)=>{e.preventDefault(); deleteKey()}}>
+                                <Button color="danger" type="submit" isDisabled={ confirmText != keys?.username} onClick={(e)=>{e.preventDefault(); deleteKey()}}>
                                     Delete
                                 </Button>
                                 <Button color="primary" variant="light" onPress={onClose}>
