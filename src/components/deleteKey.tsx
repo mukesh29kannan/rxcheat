@@ -24,7 +24,7 @@ export default function DeleteKey({keys}:any){
           }
           else {
             toast.success('Key deleted successfully')
-            router.refresh()
+            location.reload();
           }
     }
     return (

@@ -33,7 +33,7 @@ export default function Home() {
     }
     else {
       toast.success('User created successfully')
-      router.refresh();
+      location.reload();
     }
   }
   return (

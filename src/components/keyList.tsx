@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import DeleteKey from "./deleteKey";
 import { MdBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
+import ResetDevices from "./ResetDevices";
 
 export default function KeyList() {
     const [datas, setData] = useState([]);
@@ -71,17 +72,21 @@ export default function KeyList() {
         return (`${dateObject.getDate()}-${dateObject.getMonth()}-${dateObject.getFullYear()} & ${dateObject.getHours()}:${dateObject.getMinutes()}`)
     }
     const getUserName = (id:string) => users.find((user:any)=>user._id == id)?.name
+
     useEffect(() => {
         getData();
     }, [])
+
     return (
         <Table layout="auto" aria-label="Keys List Table">
             <TableHeader>
                 <TableColumn>GENERATED KEY</TableColumn>
-                <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>EXPIRE AT</TableColumn>
                 <TableColumn>VALIDITY</TableColumn>
+                <TableColumn>NO DEVICES</TableColumn>
+                <TableColumn>DEVICES USED</TableColumn>
                 <TableColumn>CREATED BY</TableColumn>
+                <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
                 <TableColumn>ACTIONS</TableColumn>
             </TableHeader>
@@ -89,15 +94,18 @@ export default function KeyList() {
                 {datas.map((key: any) => (
                     <TableRow key={key?._id}>
                         <TableCell>{key?.key}</TableCell>
-                        <TableCell>{getDate(key?.createdAt)}</TableCell>
                         <TableCell>{getDate(key?.validity)}</TableCell>
                         <TableCell>{key?.period}</TableCell>
+                        <TableCell>{key?.noDevices}</TableCell>
+                        <TableCell>{key?.deviceId?.length}</TableCell>
                         <TableCell>{getUserName(key?.createdBy)}</TableCell>
+                        <TableCell>{getDate(key?.createdAt)}</TableCell>
                         <TableCell>{getFreshStatus(key?.validity)}</TableCell>
                         <TableCell>
                             <div className="relative flex items-center ">
                                 <DeleteKey keys={key}/>
                                 {getStatus(key?.isActive, key?._id)}
+                                <ResetDevices keys={key}/>
                             </div>
                         </TableCell>
                     </TableRow>
