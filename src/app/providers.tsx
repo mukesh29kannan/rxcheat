@@ -8,7 +8,7 @@ export default function Providers({ children }: any) {
     const pathname = usePathname();
     return (
         <NextUIProvider>
-            {pathname != '/' && <NavbarComp />}
+            {(pathname != '/' && !pathname.includes('?callbackUrl')) && <NavbarComp />}
                 {children}
             <Toaster />
         </NextUIProvider>
