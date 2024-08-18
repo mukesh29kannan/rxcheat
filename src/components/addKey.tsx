@@ -9,7 +9,8 @@ export default function AddKey() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [keyFields, setKeyFields] = useState({
         key: '',
-        period: ''
+        period: '',
+        noDevices: ""
     });
     const periods = [
         { value: 1, label: 'One Day' },
@@ -21,7 +22,7 @@ export default function AddKey() {
     ]
     
     const submitKey = async () => {
-        if(keyFields.key.length && keyFields.period.length){
+        if(keyFields.key.length && keyFields.period.length && keyFields.noDevices.length){
             const response = await fetch('/api/key/create', {
                 method: 'POST',
                 headers: {
@@ -76,6 +77,16 @@ export default function AddKey() {
                                         </SelectItem>
                                     ))}
                                 </Select>
+                                <Input
+                                    isRequired
+                                    label="No Of Devices"
+                                    placeholder="Enter the No of devices"
+                                    type="number"
+                                    min="0" 
+                                    max="1000000"
+                                    value={keyFields.noDevices}
+                                    onChange={(e) => setKeyFields({ ...keyFields, noDevices: e.target.value })}
+                                />
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="danger" variant="light" onPress={onClose}>

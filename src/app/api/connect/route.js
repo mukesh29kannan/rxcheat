@@ -41,8 +41,10 @@ export async function POST(request) {
         }
 
         if (keyExist.isActive === 1) {
-            if (keyExist.deviceId === '1') {
-                await Key.findByIdAndUpdate(keyExist._id, { deviceId: sDev });
+            const devices = keyExist.deviceId;
+            if(!devices.includes(sDev)){
+                if(devices.length >= keyExist.noDevices) return NextResponse.json({ status: false, reason: 'Max Device Reached' });
+                await Key.findByIdAndUpdate(keyExist._id, { deviceId: [...devices,sDev] });
             }
             if(!keyExist.validity){
                 const futureDate = new Date();

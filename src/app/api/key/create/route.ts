@@ -7,7 +7,7 @@ export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
-    const { key, period }: any = await request.json()
+    const { key, period, noDevices }: any = await request.json()
     const session:any = await auth();
     if(!session?.user) return NextResponse.json({ status: false, message: 'Who are you' });
     const userId = session?.user?._id
@@ -22,8 +22,9 @@ export const POST = async (request: NextRequest) => {
         key: key,
         isActive: 1,
         period: period,
-        deviceId: '1',
-        createdBy: userId
+        deviceId: [],
+        createdBy: userId,
+        noDevices: noDevices
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }

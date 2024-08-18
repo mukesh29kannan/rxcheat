@@ -46,7 +46,11 @@ const keySchema = new mongoose.Schema(
       required:true
     },
     deviceId:{
-      type: String,
+      type: Array,
+      required:true
+    },
+    noDevices:{
+      type:Number,
       required:true
     },
     period:{
