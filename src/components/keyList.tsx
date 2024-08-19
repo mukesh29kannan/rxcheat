@@ -6,6 +6,7 @@ import DeleteKey from "./deleteKey";
 import { MdBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
 import ResetDevices from "./ResetDevices";
+import IsDown from "./IsDown";
 
 export default function KeyList() {
     const [datas, setData] = useState([]);
@@ -88,7 +89,7 @@ export default function KeyList() {
                 <TableColumn>CREATED BY</TableColumn>
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
-                <TableColumn>ACTIONS</TableColumn>
+                <TableColumn>ACTIONS  <IsDown/></TableColumn>
             </TableHeader>
             <TableBody isLoading={loading} emptyContent={"No keys to display."}>
                 {datas.map((key: any) => (

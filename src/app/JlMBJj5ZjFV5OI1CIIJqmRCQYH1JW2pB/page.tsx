@@ -2,7 +2,6 @@
 //import { useEffect } from 'react';
 //import { useSearchParams } from 'next/navigation';
 import AddKey from "@/components/addKey";
-import IsDown from "@/components/IsDown";
 import KeyList from "@/components/keyList";
 
 export default function Dashboard() {
@@ -19,7 +18,6 @@ export default function Dashboard() {
                 <div className="font-semibold ">Keys</div>
                 <div>
                     <AddKey />
-                    <IsDown />
                 </div>
             </div>
             <div className="py-3">
