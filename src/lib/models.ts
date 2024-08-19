@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
     isActive:{
       type:Number,
       required:true
+    },
+    isDown:{
+      type:Number,
+      required:true
     }
   },
   { timestamps: true }

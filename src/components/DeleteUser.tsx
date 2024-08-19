@@ -1,11 +1,9 @@
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useDisclosure } from "@nextui-org/react"
-import {useRouter} from "next/navigation";
 import { useState } from "react"
 import toast from "react-hot-toast";
 import { DeleteIcon } from "./DeleteIcon";
 
 export default function DeleteUser({keys}:any){
-    const router=useRouter();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [confirmText,setConfirmText] = useState('');
     const deleteKey = async () => {

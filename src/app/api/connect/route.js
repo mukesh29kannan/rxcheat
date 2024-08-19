@@ -1,8 +1,9 @@
-import { Key } from "@/lib/models";
 import { connectToDb } from "@/lib/utils";
 import { createHash } from 'crypto';
 import { NextResponse, NextRequest } from 'next/server';
 import { parse } from 'querystring';
+import { User, Key } from "@/lib/models";
+
 
 const generateMD5 = (input) => {
     const hash = createHash('md5');
@@ -42,6 +43,9 @@ export async function POST(request) {
 
         if (keyExist.isActive === 1) {
             const devices = keyExist.deviceId;
+            const key = await Key.findById(uKey)
+            const user = await User.findById(key.createdBy)
+            if(user?.isDown == 1) return NextResponse.json({ status: false, reason: 'Hack was under maintenance' });
             if(!devices.includes(sDev)){
                 if(devices.length >= keyExist.noDevices) return NextResponse.json({ status: false, reason: 'Max Device Reached' });
                 await Key.findByIdAndUpdate(keyExist._id, { deviceId: [...devices,sDev] });
