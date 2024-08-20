@@ -3,6 +3,7 @@ import { connectToDb } from "@/lib/utils";
 import { NextResponse, NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 import { auth } from "@/auth";
+import IsDown from "@/components/IsDown";
 
 export const POST = async (request: NextRequest) => {
 
@@ -25,7 +26,8 @@ export const POST = async (request: NextRequest) => {
         username: username,
         password: hashedPassword,
         key: key,
-        isActive: 1
+        isActive: 1,
+        IsDown: 0
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
