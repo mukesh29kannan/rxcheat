@@ -43,11 +43,8 @@ export async function POST(request) {
         }
 
         if (keyExist.isActive === 1) {
-            console.log("key is active")
             const devices = keyExist.deviceId;
-            const key = await Key.findById(uKey)
-            console.log("keysh",{key})
-            const user = await User.findById(key.createdBy)
+            const user = await User.findById(keyExist.createdBy)
             console.log("usersdata",{user})
             if(user?.isDown == 1) return NextResponse.json({ status: false, reason: 'Hack was under maintenance' });
             if(!devices.includes(sDev)){
