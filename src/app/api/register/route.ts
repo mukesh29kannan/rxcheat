@@ -27,7 +27,7 @@ export const POST = async (request: NextRequest) => {
         password: hashedPassword,
         key: key,
         isActive: 1,
-        IsDown: 0
+        isDown: 2
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
