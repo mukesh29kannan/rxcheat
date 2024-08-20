@@ -43,11 +43,11 @@ export async function POST(request) {
 
         if (keyExist.isActive === 1) {
             const devices = keyExist.deviceId;
-            const key = await Key.findById(uKey)
-            console.log({key})
-            const user = await User.findById(key.createdBy)
-            console.log({user})
-            if(user?.isDown == 1) return NextResponse.json({ status: false, reason: 'Hack was under maintenance' });
+            // const key = await Key.findById(uKey)
+            // console.log({key})
+            // const user = await User.findById(key.createdBy)
+            // console.log({user})
+            // if(user?.isDown == 1) return NextResponse.json({ status: false, reason: 'Hack was under maintenance' });
             if(!devices.includes(sDev)){
                 if(devices.length >= keyExist.noDevices) return NextResponse.json({ status: false, reason: 'Max Device Reached' });
                 await Key.findByIdAndUpdate(keyExist._id, { deviceId: [...devices,sDev] });
