@@ -1,8 +1,8 @@
 'use client'
 //import { useEffect } from 'react';
 //import { useSearchParams } from 'next/navigation';
-import KeyList from "@/components/KeyList";
-import AddKey from "@/components/AddKey";
+import KeyListComp from "@/components/KeyListComp";
+import AddKeyComp from "@/components/AddKeyComp";
 import IsDown from "@/components/IsDown";
 import { Chip } from "@nextui-org/react";
 
@@ -19,12 +19,12 @@ export default function Dashboard() {
             <div className="flex justify-between ">
                 <div className="pl-2"><Chip color="primary" size="lg" variant="light"><span className="font-semibold">KEYS</span></Chip> </div>
                 <div className="flex gap-5">
-                    <AddKey />
+                    <AddKeyComp />
                     <IsDown/>
                 </div>
             </div>
             <div className="py-3">
-                <KeyList />
+                <KeyListComp />
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ import { MdBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
 import ResetDevices from "./ResetDevices";
 
-export default function KeyList() {
+export default function KeyListComp() {
     const [datas, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [tableLoad, setTableLoad] = useState<boolean>(true);

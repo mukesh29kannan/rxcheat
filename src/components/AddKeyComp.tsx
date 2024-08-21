@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { PiKeyFill } from "react-icons/pi";
 
-export default function AddKey() {
+export default function AddKeyComp() {
     const router=useRouter();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [keyFields, setKeyFields] = useState({
