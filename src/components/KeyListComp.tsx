@@ -2,7 +2,7 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Chip, Tooltip , Skeleton } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import DeleteKey from "./DeleteKey";
+import DeleteKeyComp from "./DeleteKeyComp";
 import { MdBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
 import ResetDevices from "./ResetDevices";
@@ -136,7 +136,7 @@ export default function KeyListComp() {
                             <TableCell>{getFreshStatus(key?.validity)}</TableCell>
                             <TableCell>
                                 <div className="relative flex items-center">
-                                    <DeleteKey keys={key} />
+                                    <DeleteKeyComp keys={key} />
                                     {getStatus(key?.isActive, key?._id)}
                                     <ResetDevices keys={key} />
                                 </div>

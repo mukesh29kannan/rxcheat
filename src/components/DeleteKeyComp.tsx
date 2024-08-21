@@ -4,7 +4,7 @@ import { useState } from "react"
 import toast from "react-hot-toast";
 import { DeleteIcon } from "./DeleteIcon";
 
-export default function DeleteKey({keys}:any){
+export default function DeleteKeyComp({keys}:any){
     const router=useRouter();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [confirmText,setConfirmText] = useState('');
