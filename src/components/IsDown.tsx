@@ -56,7 +56,7 @@ export default function IsDown(){
     },[])
     return (
         <>
-        {downStatus.status == true && (downStatus.isDown == false ? <Tooltip content="set maintenance"><Button isIconOnly className="bg-transparent" onPress={onOpen} ><span className="text-lg text-danger bg-transparent cursor-pointer active:opacity-50"><FaScrewdriverWrench/></span></Button></Tooltip> : <Tooltip content="remove maintenance"><Button isIconOnly className="bg-transparent" onPress={onOpen} ><span className="text-lg text-success bg-transparent cursor-pointer active:opacity-50"><SiGoogleearthengine/></span></Button></Tooltip> )}
+        {downStatus.status == true && (downStatus.isDown == false ? <Tooltip content="set maintenance"><Button size="sm" variant="shadow" color="danger" onPress={onOpen} endContent={<FaScrewdriverWrench/>} >Maintenance</Button></Tooltip> : <Tooltip content="remove maintenance"><Button size="sm" color="success" onPress={onOpen} endContent={<SiGoogleearthengine/>}>Maintenance</Button></Tooltip> )}
         <Modal isOpen={isOpen} placement={'auto'} onOpenChange={onOpenChange} >
             <ModalContent>
             {(onClose) => (

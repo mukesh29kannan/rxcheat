@@ -3,6 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { PiKeyFill } from "react-icons/pi";
 
 export default function AddKey() {
     const router=useRouter();
@@ -46,7 +47,7 @@ export default function AddKey() {
 
     return (
         <>
-            <Button onPress={onOpen} color="primary" size="sm" variant="light">Generate</Button>
+            <Button onPress={onOpen} color="primary" size="sm" variant="shadow" endContent={<PiKeyFill/>}>Generate</Button>
             <Modal
                 isOpen={isOpen}
                 placement={'auto'}

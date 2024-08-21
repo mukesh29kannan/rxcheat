@@ -2,7 +2,7 @@
 
 import DeleteUser from "@/components/DeleteUser";
 import DeleteUserKeys from "@/components/DeleteUserKeys";
-import { Button, Chip, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react";
+import { Button, Chip, Skeleton, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react";
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { CgUnblock } from "react-icons/cg";
@@ -11,11 +11,24 @@ import { MdBlock } from "react-icons/md";
 export default function UsersList(){
     const [users,setUsers] = useState([]);
     const [keys,setKeys] = useState([]);
-    const [loading,setLoading]= useState(true);
+    const [loading,setLoading]= useState(false);
+    const [tableLoad,setTableLoad] = useState(true);
+
+    const getTableSkeleton = (row: number[] ,column: number[]) =>{
+
+        return row.map((r)=>(<TableRow key={r}>
+                    {column.map((c)=>(
+                        <TableCell key={c}>
+                            <Skeleton className="w-full h-full rounded-lg">
+                                <div className="h-3 w-full rounded-lg bg-secondary-200"></div>
+                            </Skeleton>
+                        </TableCell>) )}
+                    </TableRow>))
+    }
 
     const getUsers = async () => {
         try {
-            setLoading(true)
+            setTableLoad(true)
             const response = await fetch(`/api/users/list`, {
                 method: 'POST',
                 headers: {
@@ -34,7 +47,7 @@ export default function UsersList(){
             toast.error('Something went wrong')
 
         }finally{
-            setLoading(false)
+            setTableLoad(false)
         }
     }
 
@@ -121,8 +134,8 @@ export default function UsersList(){
                             <TableColumn>NO KEYS</TableColumn>
                             <TableColumn>ACTION</TableColumn>
                         </TableHeader>
-                        <TableBody isLoading={loading} emptyContent={"No keys to display."}>
-                                {
+                        <TableBody  emptyContent={"No keys to display."}>
+                                { tableLoad == true ? getTableSkeleton([1,2,3,4,5],[1,2,3,4,5]) : 
                                     users.map((user:any)=>(
                                         <TableRow key={user?._id}>
                                             <TableCell>{user?.name}</TableCell>
