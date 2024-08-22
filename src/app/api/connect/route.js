@@ -91,6 +91,7 @@ export async function GET() {
         </div>
         <div>
             <p>Telegram username: @iamhackerbgmi</p>
+            <p>Telegram Channel Link: <a href='https://t.me/rxcheat_hacker'>https://t.me/rxcheat_hacker</a></p>
         </div>
     `;
 

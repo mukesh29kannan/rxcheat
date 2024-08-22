@@ -2,15 +2,20 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
 import {  useState } from "react";
 import { handleLogout } from "@/lib/actions";
+import { useRouter } from "next/router";
 export default function NavbarComp() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const router = useRouter();
   const menuItems = [
     "Dashboard",
     "Log Out",
   ];
 
+  const logOut = async () => {
+    await handleLogout();
+    router.push('/')
+  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -46,7 +51,7 @@ export default function NavbarComp() {
           <Link href="#">Login</Link>
         </NavbarItem> */}
         <NavbarItem>
-          <Button color="primary" onClick={(e)=>handleLogout()} variant="flat">
+          <Button color="primary" onClick={(e)=>logOut()} variant="flat">
             Log out
           </Button>
         </NavbarItem>
