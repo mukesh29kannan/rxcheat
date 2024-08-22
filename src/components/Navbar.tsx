@@ -2,7 +2,7 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
 import {  useState } from "react";
 import { handleLogout } from "@/lib/actions";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 export default function NavbarComp() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
