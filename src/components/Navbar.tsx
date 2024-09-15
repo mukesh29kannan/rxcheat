@@ -1,78 +1,94 @@
-"use client"
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
-import {  useState } from "react";
+"use client";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  Skeleton,
+  DropdownItem,
+  DropdownMenu,
+  User,
+} from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import { handleLogout } from "@/lib/actions";
 import { useRouter } from "next/navigation";
+import { PiGameControllerFill } from "react-icons/pi";
+import { FaUser } from "react-icons/fa6";
+import toast from "react-hot-toast";
+
 export default function NavbarComp() {
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-  const menuItems = [
-    "Dashboard",
-    "Log Out",
-  ];
+  const [user, setUser] = useState<any>("");
 
+  useEffect(() => {
+    const name = localStorage.getItem("user");
+    setUser(name);
+  }, []);
   const logOut = async () => {
+    toast.success('See you soon! 👋')
     await handleLogout();
-    router.push('/')
-  }
+    router.push("/");
+  };
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
-        {/* <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        /> */}
-        <NavbarBrand>
-          <p className="font-bold text-inherit">RX Cheat</p>
-        </NavbarBrand>
-      </NavbarContent>
-
-      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent> */}
+    <Navbar
+      maxWidth="full"
+      classNames={{ base: "border-1 border-b-primary-300" }}
+    >
+      <NavbarBrand>
+        <span className=" mr-2">
+          <PiGameControllerFill />
+        </span>
+        <p className="font-bold text-inherit">RX Cheat</p>
+      </NavbarBrand>
       <NavbarContent justify="end">
-        {/* <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem> */}
         <NavbarItem>
-          <Button color="primary" onClick={(e)=>logOut()} variant="flat">
-            Log out
-          </Button>
+          <Dropdown>
+            <DropdownTrigger>
+              {user.length ? (
+                <Button variant="flat" color="primary" className={`capitalize`}>
+                  {user}
+                </Button>
+              ) : (
+                <div>
+                  <Skeleton className="flex rounded-full w-10 h-10 drop-shadow-md" />
+                </div>
+              )}
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Static Actions">
+              <DropdownItem
+                isReadOnly
+                key="profile"
+                className="h-14 gap-2 opacity-100"
+              >
+                <User
+                  name={user}
+                  description="rx cheat user 🎮"
+                  classNames={{
+                    name: "text-default-600",
+                    description: "text-default-500",
+                  }}
+                  avatarProps={{
+                    size: "sm",
+                    src: "/assets/images/profile-circle.svg",
+                  }}
+                />
+              </DropdownItem>
+              <DropdownItem
+                key="logout"
+                className="text-danger"
+                color="danger"
+                onClick={logOut}
+              >
+                Logout
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
     </Navbar>
   );
 }
-

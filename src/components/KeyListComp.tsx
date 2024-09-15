@@ -1,5 +1,5 @@
 'use client'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Chip, Tooltip , Skeleton } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Chip, Tooltip , Skeleton, Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeleteKeyComp from "./DeleteKeyComp";
@@ -12,7 +12,9 @@ export default function KeyListComp() {
     const [loading, setLoading] = useState<boolean>(false);
     const [tableLoad, setTableLoad] = useState<boolean>(true);
     const [users, setUsers] = useState<any[]>([]);
-    
+    const [search,setSearch] = useState('');
+    const [filterData,setFilterData] = useState<any>([]);
+
     const getTableSkeleton = (row: number[] ,column: number[]) =>{
 
         return row.map((r)=>(<TableRow key={r}>
@@ -111,8 +113,29 @@ export default function KeyListComp() {
     useEffect(() => {
         getData();
     }, []);
+    useEffect(()=>{
+        if(search.length){
+            const d:any = datas.filter((d:any)=> d.key.toLowerCase().includes(search.toLowerCase()))
+            setFilterData(d)
+        }
+        else{
+            setFilterData(datas)
+        }
+    },[search,datas])
 
-    return <Table layout="auto" aria-label="Keys List Table">
+    return <>
+            <div className="mb-2 grid justify-items-end">
+                <Input
+                    isRequired
+                    label="Search"
+                    placeholder="Enter key"
+                    type="text"
+                    className="lg:w-3/12"
+                    value={search}
+                    onChange={(e) => setSearch( e.target.value )}
+                />
+            </div>
+            <Table layout="auto" aria-label="Keys List Table">
             <TableHeader>
                 <TableColumn>GENERATED KEY</TableColumn>
                 <TableColumn>EXPIRE AT</TableColumn>
@@ -124,7 +147,7 @@ export default function KeyListComp() {
                 <TableColumn>STATUS</TableColumn>
                 <TableColumn>ACTIONS</TableColumn>
             </TableHeader><TableBody emptyContent="No keys to display.">
-                    {( tableLoad == true) ? ( getTableSkeleton([1,2,3,4,5],[1,2,3,4,5,6,7,8,9]) ) : datas?.map((key: any) => (
+                    {( tableLoad == true) ? ( getTableSkeleton([1,2,3,4,5],[1,2,3,4,5,6,7,8,9]) ) : filterData?.map((key: any) => (
                         <TableRow key={key?._id}>
                             <TableCell>{key?.key}</TableCell>
                             <TableCell>{getDate(key?.validity)}</TableCell>
@@ -145,4 +168,5 @@ export default function KeyListComp() {
                     ))}
                 </TableBody>
         </Table>
+        </>
 }

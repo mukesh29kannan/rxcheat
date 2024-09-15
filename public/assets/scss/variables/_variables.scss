@@ -1,0 +1,45 @@
+// Grid break points
+$grid-breakpoints: ( md: 768px, lg: 992px, xl: 1200px, xxl: 1680px, ) !default;
+// Container break points
+$container-width: ( md: 720px, lg: 960px, xl: 1200px, xxl: 1300px, ) !default;
+// Spacing break points
+$spacing-breakpoints: ( md: 768px, lg: 992px, xl: 1200px, xxl: 1680px, ) !default;
+// Spacing upto 40px
+$spacing-count: 4 !default;
+// Grid setting
+$grid-columns: 12 !default;
+// Gutter width
+$grid-gutter-width: 24px !default;
+$grid-breakpoints-keys: map-keys($grid-breakpoints);
+$grid_clear: true;
+// Base Path
+$basepath: "/assets";
+// Font File Name
+$font-path-light: "GilmerLight"; // 300
+$font-path-regular: "GilmerRegular"; // 400
+$font-path-medium: "GilmerMedium"; // 600
+$font-path-bold: "GilmerBold"; // 700
+$font-path-heavy: "GilmerHeavy"; // 800
+$font-path-outline: "GilmerOutline"; // 800
+// Font Family
+$font-light: "GilmerLight",
+sans-serif; // 300
+$font-regular: "GilmerRegular",
+sans-serif; // 400
+$font-medium: "GilmerMedium",
+sans-serif; // 600
+$font-bold: "GilmerBold",
+sans-serif; // 700
+$font-heavy: "GilmerHeavy",
+sans-serif; // 800
+$font-outline: "GilmerOutline",
+sans-serif; // 800
+// Base Color
+$white: #fff;
+$black: #000;
+// Theme Color
+$primary: #ffcb08;
+$secondary: #605f5f;
+$grey: #f2f2f2;
+// Text Color
+$text-pri: #212529;

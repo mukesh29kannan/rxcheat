@@ -1,0 +1,6 @@
+@include font-face('#{$font-path-light}', '#{$basepath}/fonts/#{$font-path-light}');
+@include font-face('#{$font-path-regular}', '#{$basepath}/fonts/#{$font-path-regular}');
+@include font-face('#{$font-path-medium}', '#{$basepath}/fonts/#{$font-path-medium}');
+@include font-face('#{$font-path-bold}', '#{$basepath}/fonts/#{$font-path-bold}');
+@include font-face('#{$font-path-heavy}', '#{$basepath}/fonts/#{$font-path-heavy}');
+@include font-face('#{$font-path-outline}', '#{$basepath}/fonts/#{$font-path-outline}');

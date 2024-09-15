@@ -6,11 +6,12 @@ export default function Dashboard() {
 				<div className="row">	
 					<div className="col-sm-12 ">
 						<div className="col-sm-10 col-sm-offset-1  text-center">
+							<h1 className="text-center text-4xl font-bold">HEY !</h1>
 							<div className="four_zero_four_bg">
-								<h1 className="text-center ">HEY</h1>
+								
 							</div>
 							<div className="contant_box_404">
-								<h2 className="h2">Nee en da inga vandha! 🤨</h2>
+								<h2 className="h2 text-xl">Nee en da inga vandha! 🤨</h2>
 							</div>
 						</div>
 					</div>

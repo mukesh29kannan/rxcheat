@@ -1,0 +1,236 @@
+body {
+    font-size: 14px;
+    font-family: $font-regular !important;
+    line-height: 22px;
+    color: $text-pri !important;
+    background: $white;
+}
+
+p {
+    font-size: 14px;
+    font-family: $font-medium;
+    line-height: 24px;
+}
+
+strong {
+    font-family: $font-bold;
+}
+
+.font {
+    &-regular {
+        font-family: $font-regular;
+        * {
+            font-family: $font-regular;
+        }
+    }
+    &-medium {
+        font-family: $font-medium;
+        * {
+            font-family: $font-medium;
+        }
+    }
+    &-bold {
+        font-family: $font-bold;
+        * {
+            font-family: $font-bold;
+        }
+    }
+    &-heavy {
+        font-family: $font-heavy;
+        * {
+            font-family: $font-heavy;
+        }
+    }
+}
+
+.text {
+    &-white {
+        color: $white !important;
+        * {
+            color: $white !important;
+        }
+    }
+    &-black {
+        color: $black !important;
+        * {
+            color: $black !important;
+        }
+    }
+    &-grey {
+        color: $text-pri !important;
+        * {
+            color: $text-pri !important;
+        }
+    }
+    &-red {
+        color: #ff0000 !important;
+        * {
+            color: #ff0000 !important;
+        }
+    }
+    &-green {
+        color: #008000 !important;
+        * {
+            color: #008000 !important;
+        }
+    }
+}
+
+// Grid Space
+.grid-space {
+    &-small {
+        margin-bottom: -20px;
+        &.row>[class*="col-"] {
+            margin-bottom: 20px;
+        }
+    }
+    &-medium {
+        margin-bottom: -15px;
+        @media (min-width: 768px) {
+            margin-bottom: -30px;
+        }
+        &.row>[class*="col-"] {
+            margin-bottom: 15px;
+            @media (min-width: 768px) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+    &-large {
+        margin-bottom: -20px;
+        @media (min-width: 768px) {
+            margin-bottom: -40px;
+        }
+        &.row>[class*="col-"] {
+            margin-bottom: 20px;
+            @media (min-width: 768px) {
+                margin-bottom: 40px;
+            }
+        }
+    }
+    &-xlarge {
+        margin-bottom: -30px;
+        @media (min-width: 768px) {
+            margin-bottom: -60px;
+        }
+        &.row>[class*="col-"] {
+            margin-bottom: 30px;
+            @media (min-width: 768px) {
+                margin-bottom: 60px;
+            }
+        }
+    }
+}
+
+.remove-space-last>*:last-child {
+    margin-bottom: 0 !important;
+}
+
+// Dymanic Content
+.editor-content {
+    * {
+        font-size: 14px;
+        font-family: $font-regular;
+        line-height: 22px;
+        color: $text-pri;
+    }
+    &>* {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+    & :where(h1, h2, h3, h4, h5, h6) {
+        font-size: 32px;
+        font-family: $font-medium;
+        line-height: 40px;
+    }
+    & :where(h2, h3) {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    & :where(h4, h5, h6) {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    ol,
+    ul {
+        display: block;
+        li {
+            margin-bottom: 15px;
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+    picture {
+        margin-bottom: 30px;
+    }
+    ol {
+        list-style-type: decimal;
+        margin-left: 15px;
+        li {
+            padding-left: 5px;
+        }
+    }
+    ul {
+        li {
+            position: relative;
+            padding-left: 15px;
+            &::before {
+                content: "";
+                width: 4px;
+                height: 4px;
+                background: $text-pri;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                border-radius: 50%;
+            }
+        }
+    }
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 30px;
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: $white;
+        tr {
+            background: #f9fafa;
+            &:nth-child(even) {
+                background: #eef3f3;
+            }
+        }
+        th,
+        td {
+            text-align: center;
+            padding: 15px;
+            white-space: nowrap;
+            vertical-align: middle;
+            border: 1px solid $white;
+            @media (min-width: 768px) {
+                white-space: initial;
+            }
+        }
+        th,
+        th>* {
+            font-size: 16px;
+            line-height: 24px;
+            color: $white;
+            background: $primary;
+            @media (min-width: 1680px) {
+                font-size: 18px;
+                line-height: 26px;
+            }
+        }
+        td,
+        td>* {
+            font-size: 14px;
+            line-height: 22px;
+            color: $text-pri;
+        }
+    }
+}
