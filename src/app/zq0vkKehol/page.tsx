@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { CgUnblock } from "react-icons/cg";
 import { MdBlock } from "react-icons/md";
+import { TbLogout } from "react-icons/tb";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -81,7 +82,7 @@ export default function UsersList() {
       } else {
         toast.error("Unable to block the user");
       }
-      getUsers();
+      location.reload();
     } catch (err) {
       toast.error("Something went wrong");
     } finally {
@@ -104,7 +105,7 @@ export default function UsersList() {
       } else {
         toast.error("Unable to block the user");
       }
-      getUsers();
+      location.reload();
     } catch (err) {
       toast.error("Something went wrong");
     } finally {
@@ -158,7 +159,7 @@ export default function UsersList() {
   };
 
   const getNoOfKeys = (id: string) =>
-    keys.reduce((acc, cur: any) => (cur?.createdBy === id ? acc + 1 : acc), 0);
+    keys?.reduce((acc, cur: any) => (cur?.createdBy === id ? acc + 1 : acc), 0);
 
   useEffect(() => {
     getUsers();

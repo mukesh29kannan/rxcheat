@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 import { handleLogout } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { PiGameControllerFill } from "react-icons/pi";
-import { FaUser } from "react-icons/fa6";
 import toast from "react-hot-toast";
 
 export default function NavbarComp() {
