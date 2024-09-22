@@ -25,7 +25,7 @@ export const POST = async (request: NextRequest) => {
         deviceId: [],
         createdBy: userId,
         noDevices: noDevices,
-        game: noDevices
+        game: game
       });
       return NextResponse.json({ status: true, message: 'user created successfully' });
     }
