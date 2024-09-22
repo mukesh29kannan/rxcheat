@@ -47,6 +47,11 @@ export async function POST(request) {
             const user = await User.findById(keyExist.createdBy)
             console.log("usersdata",{user})
             if(user?.isDown == 1) return NextResponse.json({ status: false, reason: 'Hack was under maintenance' });
+
+            if(keyExist.game != game){
+                return NextResponse.json({ status: false, reason: 'Invalid App' });
+            }
+            
             if(!devices.includes(sDev)){
                 if(devices.length >= keyExist.noDevices) return NextResponse.json({ status: false, reason: 'Max Device Reached' });
                 await Key.findByIdAndUpdate(keyExist._id, { deviceId: [...devices,sDev] });
@@ -60,10 +65,6 @@ export async function POST(request) {
             const tillDate = new Date(keyExist.validity);
             if (keyExist.validity &&  now > tillDate) {
                 return NextResponse.json({ status: false, reason: 'Key is expired' });
-            }
-
-            if(keyExist.game != game){
-                return NextResponse.json({ status: false, reason: 'Invalid App' });
             }
 
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
