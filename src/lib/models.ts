@@ -61,6 +61,11 @@ const keySchema = new mongoose.Schema(
       type:Number,
       required:true
     },
+    game: {
+      type: String,
+      required: true,
+      max: 50,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

@@ -11,7 +11,8 @@ export default function AddKeyComp() {
     const [keyFields, setKeyFields] = useState({
         key: '',
         period: '',
-        noDevices: ""
+        noDevices: "",
+        game:"pubg"
     });
     const periods = [
         { value: 1, label: 'One Day' },
@@ -23,7 +24,7 @@ export default function AddKeyComp() {
     ]
     
     const submitKey = async () => {
-        if(keyFields.key.length && keyFields.period.length && keyFields.noDevices.length){
+        if(keyFields.key.length && keyFields.period.length && keyFields.noDevices.length && keyFields.game.length){
             const response = await fetch('/api/key/create', {
                 method: 'POST',
                 headers: {
@@ -65,6 +66,14 @@ export default function AddKeyComp() {
                                     type="text"
                                     value={keyFields.key}
                                     onChange={(e) => setKeyFields({ ...keyFields, key: e.target.value })}
+                                />
+                                <Input
+                                    isRequired
+                                    label="game"
+                                    placeholder="Enter game"
+                                    type="text"
+                                    value={keyFields.game}
+                                    onChange={(e) => setKeyFields({ ...keyFields, game: e.target.value })}
                                 />
                                 <Select
                                     label="Time Period"

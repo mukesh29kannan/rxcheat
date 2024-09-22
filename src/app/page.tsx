@@ -15,9 +15,6 @@ export default function HomePage() {
   useEffect(()=>{
     window.history.pushState({}, '', '/');
   },[])
-  if(1==1){
-    return("Mooditu kalambu ellam mudinchu");
-  }
   return (
     <div className="flex flex-col w-full items-center justify-center h-screen">
       <div className="flex flex-row pb-4 space-x-3 items-center">

@@ -62,6 +62,10 @@ export async function POST(request) {
                 return res.json({ status: false, reason: 'Key is expired' });
             }
 
+            if(keyExist.game != game){
+                return res.json({ status: false, reason: 'Invalid App' });
+            }
+
             const tokenGen = generateMD5(`${game}-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             return NextResponse.json({
                 status: true,

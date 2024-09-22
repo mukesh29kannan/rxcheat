@@ -143,6 +143,7 @@ export default function KeyListComp() {
                 <TableColumn>NO DEVICES</TableColumn>
                 <TableColumn>DEVICES USED</TableColumn>
                 <TableColumn>CREATED BY</TableColumn>
+                <TableColumn>GAME</TableColumn>
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
                 <TableColumn>ACTIONS</TableColumn>
@@ -154,6 +155,7 @@ export default function KeyListComp() {
                             <TableCell>{key?.period}</TableCell>
                             <TableCell>{key?.noDevices}</TableCell>
                             <TableCell>{key?.deviceId?.length}</TableCell>
+                            <TableCell>{key?.game}</TableCell>
                             <TableCell>{getUserName(key?.createdBy)}</TableCell>
                             <TableCell>{getDate(key?.createdAt)}</TableCell>
                             <TableCell>{getFreshStatus(key?.validity)}</TableCell>
