@@ -12,7 +12,7 @@ export default function AddKeyComp() {
         key: '',
         period: '',
         noDevices: "",
-        game:"pubg"
+        game:"PUBG"
     });
     const periods = [
         { value: 1, label: 'One Day' },
