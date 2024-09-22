@@ -142,13 +142,13 @@ export default function KeyListComp() {
                 <TableColumn>VALIDITY</TableColumn>
                 <TableColumn>NO DEVICES</TableColumn>
                 <TableColumn>DEVICES USED</TableColumn>
-                <TableColumn>CREATED BY</TableColumn>
                 <TableColumn>GAME</TableColumn>
+                <TableColumn>CREATED BY</TableColumn>
                 <TableColumn>CREATED AT</TableColumn>
                 <TableColumn>STATUS</TableColumn>
                 <TableColumn>ACTIONS</TableColumn>
             </TableHeader><TableBody emptyContent="No keys to display.">
-                    {( tableLoad == true) ? ( getTableSkeleton([1,2,3,4,5],[1,2,3,4,5,6,7,8,9]) ) : filterData?.map((key: any) => (
+                    {( tableLoad == true) ? ( getTableSkeleton([1,2,3,4,5],[1,2,3,4,5,6,7,8,9,10]) ) : filterData?.map((key: any) => (
                         <TableRow key={key?._id}>
                             <TableCell>{key?.key}</TableCell>
                             <TableCell>{getDate(key?.validity)}</TableCell>
