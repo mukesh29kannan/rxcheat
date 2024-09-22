@@ -66,7 +66,7 @@ export async function POST(request) {
                 return NextResponse.json({ status: false, reason: 'Invalid App' });
             }
 
-            const tokenGen = generateMD5(`${game}-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
+            const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             return NextResponse.json({
                 status: true,
                 data: {
