@@ -5,7 +5,7 @@ import { Logs } from "@/lib/models";
 export const POST = async (request: NextRequest) => {
     try{
         await connectToDb();
-        const logs = await Logs.findOne();
+        const logs = await Logs.find();
         const response = NextResponse.json({ status: true, data: logs });
 
         // Set headers to prevent caching
