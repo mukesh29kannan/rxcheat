@@ -1,3 +1,4 @@
+"use client"
 import { Input, Skeleton, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
