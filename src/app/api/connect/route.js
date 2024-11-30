@@ -36,6 +36,13 @@ export async function POST(request) {
 
         await connectToDb(); // Ensure you wait for the DB connection
 
+        const keyExist = await Key.findOne({ key: uKey });
+
+
+        if (!keyExist) {
+            return NextResponse.json({ status: false, reason: 'Key not exists' });
+        }
+
         const today = new Date().toISOString().split('T')[0];
 
         const dateExists = await Logs.findOne({ date: today });
@@ -47,14 +54,7 @@ export async function POST(request) {
             const count = dateExists?.count + 1;
             await Logs.findByIdAndUpdate(id,{count});
         }
-
-        const keyExist = await Key.findOne({ key: uKey });
-
-
-        if (!keyExist) {
-            return NextResponse.json({ status: false, reason: 'Key not exists' });
-        }
-
+        
         if (keyExist.isActive === 1) {
             const devices = keyExist.deviceId;
             const user = await User.findById(keyExist.createdBy)
