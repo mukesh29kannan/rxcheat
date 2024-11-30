@@ -25,7 +25,7 @@ export default function GetLogs(){
             toast.error("Who are you");
             return "";
           }
-          setLogs(data.data.users);
+          setLogs(data.data);
         } catch (err) {
           toast.error("Something went wrong");
         } finally {
