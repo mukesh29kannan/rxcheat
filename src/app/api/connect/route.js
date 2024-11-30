@@ -2,7 +2,7 @@ import { connectToDb } from "@/lib/utils";
 import { createHash } from 'crypto';
 import { NextResponse, NextRequest } from 'next/server';
 import { parse } from 'querystring';
-import { User, Key } from "@/lib/models";
+import { User, Key, Logs } from "@/lib/models";
 
 
 const generateMD5 = (input) => {
@@ -12,6 +12,7 @@ const generateMD5 = (input) => {
 };
 
 export async function POST(request) {
+
     try {
         // Parse URL-encoded form data
         const body = await request.text();
@@ -35,9 +36,21 @@ export async function POST(request) {
 
         await connectToDb(); // Ensure you wait for the DB connection
 
+        const today = new Date().toISOString().split('T')[0];
+
+        const dateExists = await Logs.findOne({ date: today });
+        if(!dateExists){
+            await Logs.create({date:today,count:1});
+        }
+        else{
+            const id = dateExists._id;
+            const count = dateExists?.count + 1;
+            await Logs.findByIdAndUpdate(id,{count});
+        }
+
         const keyExist = await Key.findOne({ key: uKey });
 
-        console.log("keyExist check",keyExist)
+
         if (!keyExist) {
             return NextResponse.json({ status: false, reason: 'Key not exists' });
         }

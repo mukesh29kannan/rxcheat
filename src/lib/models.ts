@@ -74,5 +74,20 @@ const keySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const logSchema = new mongoose.Schema(
+  {
+    date: {
+      type: String,
+      required: true,
+      max: 50,
+    },
+    count: {
+      type: Number,
+      required: true
+    }
+  },
+  { timestamps: true }
+);
 export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Key = mongoose.models?.Key || mongoose.model("Key", keySchema);
+export const Logs = mongoose.models?.logs || mongoose.model("Logs",logSchema );
