@@ -48,6 +48,7 @@ export default function GetLogs(){
       };
     
     useEffect(()=>{
+        history?.pushState(null,"",'/getLogs');
         getLogs();
     },[])
 
