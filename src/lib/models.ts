@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -82,9 +81,20 @@ const logSchema = new mongoose.Schema(
       max: 50,
     },
     count: {
-      type: Number,
-      required: true
-    }
+      type: new mongoose.Schema({
+        total: { type: Number, required: true },
+        success: { type: Number, required: true },
+        failed: { type: Number, required: true },
+        badRequest: { type: Number, required: true },
+        noKey: { type: Number, required: true },
+        isActiveFailed: { type: Number, required: true },
+        isDownUser: { type: Number, required: true },
+        inValidGame: { type: Number, required: true },
+        maxDevice: { type: Number, required: true },
+        expiredKey: { type: Number, required: true },
+      }),
+      required: true,
+    },
   },
   { timestamps: true }
 );
