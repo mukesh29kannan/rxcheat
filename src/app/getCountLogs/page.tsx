@@ -97,7 +97,7 @@ export default function GetLogs() {
             {tableLoad == true
               ? getTableSkeleton([1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
               : filterData.map((user: any) => (
-                <TableRow key={user?.count?.count._id}>
+                <TableRow key={user?._id}>
                   <TableCell>{user?.count?.date}</TableCell>
                   <TableCell>{user?.count?.success}</TableCell>
                   <TableCell>{user?.count?.failed}</TableCell>
