@@ -108,7 +108,7 @@ export default function GetLogs() {
                   <TableCell>{user?.count?.inValidGame}</TableCell>
                   <TableCell>{user?.count?.maxDevice}</TableCell>
                   <TableCell>{user?.count?.expiredKey}</TableCell>
-                  <TableCell>{user?.count?.total || user?.count}</TableCell>
+                  <TableCell>{user?.count?.total}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
