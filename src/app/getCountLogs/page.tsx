@@ -97,18 +97,18 @@ export default function GetLogs() {
             {tableLoad == true
               ? getTableSkeleton([1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
               : filterData.map((user: any) => (
-                <TableRow key={user?._id}>
-                  <TableCell>{user?.date}</TableCell>
-                  <TableCell>{user?.success}</TableCell>
-                  <TableCell>{user?.failed}</TableCell>
-                  <TableCell>{user?.badRequest}</TableCell>
-                  <TableCell>{user?.noKey}</TableCell>
-                  <TableCell>{user?.isActiveFailed}</TableCell>
-                  <TableCell>{user?.isDownUser}</TableCell>
-                  <TableCell>{user?.inValidGame}</TableCell>
-                  <TableCell>{user?.maxDevice}</TableCell>
-                  <TableCell>{user?.expiredKey}</TableCell>
-                  <TableCell>{user?.total}</TableCell>
+                <TableRow key={user?.count?.count._id}>
+                  <TableCell>{user?.count?.date}</TableCell>
+                  <TableCell>{user?.count?.success}</TableCell>
+                  <TableCell>{user?.count?.failed}</TableCell>
+                  <TableCell>{user?.count?.badRequest}</TableCell>
+                  <TableCell>{user?.count?.noKey}</TableCell>
+                  <TableCell>{user?.count?.isActiveFailed}</TableCell>
+                  <TableCell>{user?.count?.isDownUser}</TableCell>
+                  <TableCell>{user?.count?.inValidGame}</TableCell>
+                  <TableCell>{user?.count?.maxDevice}</TableCell>
+                  <TableCell>{user?.count?.expiredKey}</TableCell>
+                  <TableCell>{user?.count?.total || user?.count}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
