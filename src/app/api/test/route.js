@@ -13,3 +13,17 @@ export async function POST(request) {
         return NextResponse.json({ status: false, reason: "Internal server error" }, { status: 500 });
     }
 }
+
+// Main GET handler
+export async function GET() {
+    const htmlContent = `
+    <div>
+      <h1>RX CHEAT</h1>
+    </div>
+    <div>
+      <p>Telegram username: @iamhackerbgmi</p>
+      <p>Telegram Channel Link: <a href="https://t.me/rxcheat_hacker">https://t.me/rxcheat_hacker</a></p>
+    </div>
+  `;
+    return NextResponse.html(htmlContent);
+}
