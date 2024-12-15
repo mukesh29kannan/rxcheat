@@ -133,7 +133,7 @@ export async function POST(request) {
             return NextResponse.json({
                 status: true,
                 data: resData,
-                xpath: convertToOrd(JSON.stringify(Resdata))
+                xpath: convertToOrd(JSON.stringify(resData))
             });
         }
 
