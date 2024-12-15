@@ -25,7 +25,7 @@ export async function POST(request) {
               "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
               "rng": 1733423816
           },
-          "XPATH": convertToOrd(data)
+          "xpath": convertToOrd(data)
       });
     }
     catch (error) {
