@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
 const convertToOrd = (str) => {
-  const filteredStr = str.replace(/[^a-zA-Z0-9]/g, ''); // Removes all non-alphanumeric characters
-  return [...filteredStr].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+  
+  return [...str].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
 };
 
 // Main POST handler
@@ -17,6 +17,7 @@ export async function POST(request) {
               "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
               "rng": 1733423816
           }`;
+        const filteredStr = data.replace(/[^a-zA-Z0-9]/g, '');
         return NextResponse.json({
           "status": true,
           "data": {
@@ -28,7 +29,8 @@ export async function POST(request) {
               "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
               "rng": 1733423816
           },
-          "xpath": convertToOrd(data)
+          "xpath": convertToOrd(filteredStr),
+          "xkey": filteredStr
       });
     }
     catch (error) {
