@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 
-const convertToOrd = (str) => [...str].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+const convertToOrd = (str) => {
+  const filteredStr = str.replace(/[^a-zA-Z0-9]/g, ''); // Removes all non-alphanumeric characters
+  return [...filteredStr].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+};
 
 // Main POST handler
 export async function POST(request) {
