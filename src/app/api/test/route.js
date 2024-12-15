@@ -21,17 +21,15 @@ export async function POST(request) {
         return NextResponse.json({
           "status": true,
           "data": {
-              "SLOT": 1,
-              "EXP": "2025-01-03T04:52:02.247Z",
-              "modname": "rxcheat",
-              "mod_status": "Safe",
-              "credit": "rxcheat",
-              "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
-              "rng": 1733423816
-          },
-          "xpath": convertToOrd(filteredStr),
-          "xkey": filteredStr
-      });
+            "SLOT": 1,
+            "EXP": "2025-01-14T12:33:39.415Z",
+            "modname": "rxcheat",
+            "mod_status": "Safe",
+            "credit": "rxcheat",
+            "token": "03b9fa07e4d4d441ea33e891c055529d",
+            "rng": 1734266064
+          }
+        });
     }
     catch (error) {
         console.error("API route error:", error);
