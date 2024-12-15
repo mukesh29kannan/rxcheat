@@ -11,6 +11,11 @@ const generateMD5 = (input) => {
     return hash.digest("hex");
 };
 
+const convertToOrd = (str) => {
+    const filteredStr = str.replace(/[^a-zA-Z0-9]/g, '');
+    return [...filteredStr].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+  };
+
 // Helper function to return error responses
 const respondWithError = async (logType, reason, status = 400) => {
     await updateLogs(false, logType);
@@ -116,17 +121,19 @@ export async function POST(request) {
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             await updateLogs(true, "success");
 
+            const resData = {
+                SLOT: 1,
+                EXP: tillDate,
+                modname: "rxcheat",
+                mod_status: "Safe",
+                credit: "rxcheat",
+                token: tokenGen,
+                rng: Math.floor(Date.now() / 1000),
+            };
             return NextResponse.json({
                 status: true,
-                data: {
-                    SLOT: 1,
-                    EXP: tillDate,
-                    modname: "rxcheat",
-                    mod_status: "Safe",
-                    credit: "rxcheat",
-                    token: tokenGen,
-                    rng: Math.floor(Date.now() / 1000),
-                },
+                data: resData,
+                xpath: convertToOrd(JSON.stringify(Resdata))
             });
         }
 
