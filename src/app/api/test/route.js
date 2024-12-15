@@ -1,12 +1,32 @@
 import { NextResponse } from "next/server";
 
+const convertToOrd = (str) => [...str].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+
 // Main POST handler
 export async function POST(request) {
     try {
+        const data = `{
+              "SLOT": 1,
+              "EXP": "2025-01-03T04:52:02.247Z",
+              "modname": "iamhackerbgmi",
+              "mod_status": "Safe",
+              "credit": "rxcheat",
+              "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
+              "rng": 1733423816
+          }`;
         return NextResponse.json({
-            status: true,
-            data: "|#TMPU#;2-#FYQ#;#3136.12.14U15;63;13/358[#-#npeobnf#;#sydifbu#-#npe`tubuvt#;#Tbgf#-#dsfeju#;#sydifbu#-#uplfo#;#6e171df66g9d3:3bd14d7d9db65g1e5c#-#soh#;2844534927~",
-        });
+          "status": true,
+          "data": {
+              "SLOT": 1,
+              "EXP": "2025-01-03T04:52:02.247Z",
+              "modname": "iamhackerbgmi",
+              "mod_status": "Safe",
+              "credit": "rxcheat",
+              "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
+              "rng": 1733423816
+          },
+          "XPATH":convertToOrd(data)
+      });
     }
     catch (error) {
         console.error("API route error:", error);
