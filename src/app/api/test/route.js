@@ -8,7 +8,7 @@ export async function POST(request) {
         const data = `{
               "SLOT": 1,
               "EXP": "2025-01-03T04:52:02.247Z",
-              "modname": "iamhackerbgmi",
+              "modname": "rxcheat",
               "mod_status": "Safe",
               "credit": "rxcheat",
               "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
@@ -19,13 +19,13 @@ export async function POST(request) {
           "data": {
               "SLOT": 1,
               "EXP": "2025-01-03T04:52:02.247Z",
-              "modname": "iamhackerbgmi",
+              "modname": "rxcheat",
               "mod_status": "Safe",
               "credit": "rxcheat",
               "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
               "rng": 1733423816
           },
-          "XPATH":convertToOrd(data)
+          "XPATH": convertToOrd(data)
       });
     }
     catch (error) {
