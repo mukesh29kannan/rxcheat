@@ -19,15 +19,15 @@ export async function POST(request) {
           }`;
         const filteredStr = data.replace(/[^a-zA-Z0-9]/g, '');
         return NextResponse.json({
-          "status": true,
-          "data": {
-            "SLOT": 1,
-            "EXP": "2025-01-14T12:33:39.415Z",
-            "modname": "rxcheat",
-            "mod_status": "Safe",
-            "credit": "rxcheat",
-            "token": "03b9fa07e4d4d441ea33e891c055529d",
-            "rng": 1734266064
+          status: true,
+          data: {
+            SLOT: 1,
+            EXP: "2025-01-14T12:33:39.415Z",
+            modname: "rxcheat",
+            mod_status: "Safe",
+            credit: "rxcheat",
+            token: "03b9fa07e4d4d441ea33e891c055529d",
+            rng: 1734266064
           }
         });
     }
