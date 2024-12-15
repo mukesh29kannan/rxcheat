@@ -1,35 +1,28 @@
 import { NextResponse } from "next/server";
 
 const convertToOrd = (str) => {
-  
-  return [...str].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
+  const filteredStr = str.replace(/[^a-zA-Z0-9]/g, '');
+  return [...filteredStr].map((char) => char.charCodeAt(0)).reduce((acc, val) => acc + val, 0);
 };
 
 // Main POST handler
 export async function POST(request) {
     try {
-        const data = `{
-              "SLOT": 1,
-              "EXP": "2025-01-03T04:52:02.247Z",
-              "modname": "rxcheat",
-              "mod_status": "Safe",
-              "credit": "rxcheat",
-              "token": "5d060ce55f8c292ac03c6c8ca54f0d4b",
-              "rng": 1733423816
-          }`;
-        const filteredStr = data.replace(/[^a-zA-Z0-9]/g, '');
+        
         const tillDate = new Date("2025-01-14T12:33:39.415Z");
+        const Resdata = {
+          SLOT: 1,
+          EXP: tillDate,
+          modname: "rxcheat",
+          mod_status: "Safe",
+          credit: "rxcheat",
+          token: "03b9fa07e4d4d441ea33e891c055529d",
+          rng: Math.floor(Date.now() / 1000),
+      }
         return NextResponse.json({
                 status: true,
-                data: {
-                    SLOT: 1,
-                    EXP: tillDate,
-                    modname: "rxcheat",
-                    mod_status: "Safe",
-                    credit: "rxcheat",
-                    token: "03b9fa07e4d4d441ea33e891c055529d",
-                    rng: Math.floor(Date.now() / 1000),
-                },
+                data:Resdata,
+                xpath: convertToOrd(JSON.stringify(Resdata))
             });
     }
     catch (error) {
