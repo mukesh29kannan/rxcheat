@@ -18,18 +18,19 @@ export async function POST(request) {
               "rng": 1733423816
           }`;
         const filteredStr = data.replace(/[^a-zA-Z0-9]/g, '');
+        const tillDate = new Date("2025-01-14T12:33:39.415Z");
         return NextResponse.json({
-          status: true,
-          data: {
-            SLOT: 1,
-            EXP: "2025-01-14T12:33:39.415Z",
-            modname: "rxcheat",
-            mod_status: "Safe",
-            credit: "rxcheat",
-            token: "03b9fa07e4d4d441ea33e891c055529d",
-            rng: 1734266064
-          }
-        });
+                status: true,
+                data: {
+                    SLOT: 1,
+                    EXP: tillDate,
+                    modname: "rxcheat",
+                    mod_status: "Safe",
+                    credit: "rxcheat",
+                    token: "03b9fa07e4d4d441ea33e891c055529d",
+                    rng: Math.floor(Date.now() / 1000),
+                },
+            });
     }
     catch (error) {
         console.error("API route error:", error);
