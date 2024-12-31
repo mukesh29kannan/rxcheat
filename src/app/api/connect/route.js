@@ -155,5 +155,9 @@ export async function GET() {
       <p>Telegram Channel Link: <a href="https://t.me/rxcheat_hacker">https://t.me/rxcheat_hacker</a></p>
     </div>
   `;
-    return NextResponse.html(htmlContent);
+    return new NextResponse(htmlContent,{
+        headers:{
+            'Content-Type':'text/html'
+        }
+    });
 }
