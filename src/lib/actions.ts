@@ -2,7 +2,7 @@
 import { signIn, signOut } from "@/auth";
 import { auth } from "@/auth";
 import { User } from "@/lib/models";
-import { connectToDb } from "@/lib/utils";
+import { connectToDb } from "@/lib/mutils";
 
 export const handleLogout = async () => {
     "use server";

@@ -1,5 +1,5 @@
 import { Key } from "@/lib/models";
-import { connectToDb } from "@/lib/utils";
+import { connectToDb } from "@/lib/mutils";
 import { NextResponse, NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {

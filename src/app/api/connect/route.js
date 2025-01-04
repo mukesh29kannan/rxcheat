@@ -1,4 +1,4 @@
-import { connectToDb } from "@/lib/utils";
+import { connectToDb } from "@/lib/mutils";
 import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { parse } from "querystring";
