@@ -23,11 +23,11 @@ export const POST = async (request: NextRequest) => {
 
         // Fetch keys based on user ID
         if (userId === "66c04834552408d0ab7975e0") {
-            keys = await Key.find().exec();
+            keys = await Key.find().sort({_id:-1}).exec();
             const user = await User.find().select('name username').exec();
             keys = {keys,user}
         } else {
-            keys = await Key.find({ createdBy: userId }).exec();
+            keys = await Key.find({ createdBy: userId }).sort({_id:-1}).exec();
             const user = [
                 {
                     "_id": userId,
