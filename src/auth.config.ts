@@ -12,7 +12,7 @@ export const authConfig = {
       console.log("auth user",auth?.user)
       console.log({isLoggedIn,isOnLoginPage})
       if(isLoggedIn){
-        const res = await fetch(`/api/check-user`, {
+        const res = await fetch('/api/check-user', {
           method: "POST",
           body: JSON.stringify({
             username: auth.user.username,
