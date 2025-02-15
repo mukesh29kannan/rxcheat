@@ -12,13 +12,13 @@ export default function EditKeyComp({id,loading,fields}:any) {
     const [keyFields, setKeyFields] = useState(fields);
     const [errors, setErrors] = useState<any>({}); 
 
-    const periods = [
-        { value: 1, label: 'One Day' },
-        { value: 2, label: 'Two Days' },
-        { value: 3, label: 'Three Days' },
-        { value: 7, label: 'Seven Days' },
-        { value: 30, label: 'One Month' },
-    ];
+    const periods:any = {
+        1 : 'One Day' ,
+        2 : 'Two Days' ,
+        3 : 'Three Days' ,
+        7 : 'Seven Days' ,
+        30 : 'One Month' ,
+};
 
     const validateFields = () => {
         let newErrors:any = {};
@@ -99,21 +99,14 @@ export default function EditKeyComp({id,loading,fields}:any) {
                                 />
 
                                 {/* Select Time Period */}
-                                <Select
+                                <Input
                                     label="Time Period"
                                     placeholder="Select validity"
-                                    onChange={(e) => setKeyFields({ ...keyFields, period: e.target.value })}
                                     isInvalid={!!errors.period}
                                     errorMessage={errors.period}
-                                    defaultSelectedKeys={new Set([fields.period])}
+                                    value={periods?.[fields.period]}
                                     isDisabled
-                                >
-                                    {periods.map((period) => (
-                                        <SelectItem key={period.value} value={period.value}>
-                                            {period.label}
-                                        </SelectItem>
-                                    ))}
-                                </Select>
+                                />
 
                                 {/* No. of Devices Input */}
                                 <Input
