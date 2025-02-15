@@ -1,57 +1,36 @@
-import type { NextAuthConfig } from "next-auth";
-import { connectToDb } from "@/lib/mutils";
-import { User } from "@/lib/models";
-
+import type { NextAuthConfig } from 'next-auth';
+ 
 export const authConfig = {
   pages: {
-    signIn: "/",
+    signIn: '/',
   },
   callbacks: {
-    async authorized({ auth, request: { nextUrl } }:any) {
+    authorized({ auth, request: { nextUrl } }) {
+      // Check if the user is authenticated
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = ["/", "/connect"].includes(nextUrl.pathname);
-
-      console.log("Auth user:", auth?.user);
-      console.log({ isLoggedIn, isOnLoginPage });
-
-      if (isOnLoginPage) return !isLoggedIn; 
-
-      // If user is logged in, validate the loginToken in the database
-      if (isLoggedIn && auth?.user?.loginToken) {
-        await connectToDb();
-        const dbUser = await User.findOne({ username: auth.user.username });
-
-        if (!dbUser || dbUser.loginToken !== auth.user.loginToken) {
-          console.log("Invalid or expired loginToken. Logging out...");
-          return false; // Deny access if token doesn't match
-        }
-
-        return true; // Allow access if token is valid
+      const isOnLoginPage = nextUrl.pathname == '/';
+      console.log("auth user",auth?.user)
+      console.log({isLoggedIn,isOnLoginPage})
+      if(isOnLoginPage){
+        if(isLoggedIn) return Response.redirect(new URL('/dashboard', nextUrl));
+        return true;
       }
-
-      return false; // Block access if not logged in or missing token
+      else{
+        if(isLoggedIn) return true;
+        return false;
+      }
     },
-    async session({ session, token }: any) {
-      if (token.user) {
-        session.user = token.user;
-      } else {
-        session.user = null; // Ensure session is invalid if token is missing
-      }
+    async session({ session, token, user }:any) {
+      session.user = token.user
       return session;
     },
-    async jwt({ token, user }: any) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.user = user;
       }
-
-      // Ensure token has a valid loginToken
-      if (!token.user?.loginToken) {
-        return {};
-      }
-
       return token;
     },
   },
-  secret: "JlMBJj5ZjFV5OI1CIIJqmRCQYH1JW2pB",
-  providers: [], // Add authentication providers here
+  secret: 'JlMBJj5ZjFV5OI1CIIJqmRCQYH1JW2pB',
+  providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
