@@ -26,6 +26,7 @@ export const authConfig = {
         });
 
         const data = await res.json();
+        console.log({data})
         if (!data.valid) return false;
 
         // Redirect logged-in users from login page to dashboard
