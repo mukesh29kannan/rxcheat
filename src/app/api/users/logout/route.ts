@@ -6,7 +6,7 @@ export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
-    const { user_id }: any = await request.json()
+    const { user_id }: any = await request.json();
     if (user_id.length) {
         await User.findOneAndUpdate(
             { _id: user_id },

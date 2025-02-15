@@ -218,7 +218,7 @@ export default function UsersList() {
                         {getBlockStatus(user?.isActive, user?._id)}
                         <DeleteUser keys={user} />
                         <DeleteUserKeys keys={user} />
-                        <Logout keys={user?._id} />
+                        <Logout id={user?._id} />
                       </div>
                     </TableCell>
                   </TableRow>
