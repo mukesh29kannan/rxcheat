@@ -102,7 +102,6 @@ export default function EditKeyComp({id,loading,fields}:any) {
                                 <Select
                                     label="Time Period"
                                     placeholder="Select validity"
-                                    selectedKeys={[keyFields.period]}
                                     onChange={(e) => setKeyFields({ ...keyFields, period: e.target.value })}
                                     isInvalid={!!errors.period}
                                     errorMessage={errors.period}
