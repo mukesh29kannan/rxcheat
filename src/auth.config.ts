@@ -13,15 +13,18 @@ export const authConfig = {
       console.log("Auth user:", auth?.user);
       console.log({ isLoggedIn, isOnLoginPage });
 
-      if (isOnLoginPage) {
-        if (!auth?.user?.username || !auth?.user?.loginToken) return false;
+      if (!auth?.user) return false; // Ensure user exists before accessing properties.
 
+      if (isOnLoginPage) {
         const user = await User.findOne({ 
           username: auth.user.username, 
           loginToken: auth.user.loginToken 
         });
 
-        return !!user; // Return true if user exists, false otherwise
+        if (!user) return false;
+
+        // Redirect logged-in users from login page to dashboard
+        return Response.redirect(new URL('/dashboard', nextUrl));
       }
 
       return isLoggedIn; // Allow access to other pages only if logged in
