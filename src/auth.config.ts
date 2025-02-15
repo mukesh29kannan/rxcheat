@@ -1,5 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 import { User } from './lib/models';
+import { connectToDb } from './lib/mutils';
  
 export const authConfig = {
   pages: {
@@ -16,6 +17,8 @@ export const authConfig = {
       if (!auth?.user) return false; // Ensure user exists before accessing properties.
 
       if (isOnLoginPage) {
+        await connectToDb();
+        
         const user = await User.findOne({ 
           username: auth.user.username, 
           loginToken: auth.user.loginToken 
