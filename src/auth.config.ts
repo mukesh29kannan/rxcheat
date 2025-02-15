@@ -1,6 +1,4 @@
 import type { NextAuthConfig } from 'next-auth';
-import { User } from './lib/models';
-import { connectToDb } from './lib/mutils';
  
 export const authConfig = {
   pages: {
@@ -9,7 +7,7 @@ export const authConfig = {
   callbacks: {
     async authorized({ auth, request: { nextUrl } }: any) {
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname === '/' || nextUrl.pathname === '/connect';
+      const isOnLoginPage = nextUrl.pathname === "/" || nextUrl.pathname === "/connect";
 
       console.log("Auth user:", auth?.user);
       console.log({ isLoggedIn, isOnLoginPage });
@@ -17,17 +15,21 @@ export const authConfig = {
       if (!auth?.user) return false; // Ensure user exists before accessing properties.
 
       if (isOnLoginPage) {
-        await connectToDb();
-        
-        const user = await User.findOne({ 
-          username: auth.user.username, 
-          loginToken: auth.user.loginToken 
+        // Call an API route instead of using Mongoose here
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/check-user`, {
+          method: "POST",
+          body: JSON.stringify({
+            username: auth.user.username,
+            loginToken: auth.user.loginToken,
+          }),
+          headers: { "Content-Type": "application/json" },
         });
 
-        if (!user) return false;
+        const data = await res.json();
+        if (!data.valid) return false;
 
         // Redirect logged-in users from login page to dashboard
-        return Response.redirect(new URL('/dashboard', nextUrl));
+        return Response.redirect(new URL("/dashboard", nextUrl));
       }
 
       return isLoggedIn; // Allow access to other pages only if logged in
