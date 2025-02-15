@@ -6,26 +6,25 @@ export const authConfig = {
     signIn: '/',
   },
   callbacks: {
-    async authorized({ auth, request: { nextUrl } }:any) {
-      // Check if the user is authenticated
+    async authorized({ auth, request: { nextUrl } }: any) {
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname == '/' || nextUrl.pathname == '/connect';
-      console.log("auth user",auth?.user)
-      console.log({isLoggedIn,isOnLoginPage})
-      if(isOnLoginPage){
-        const user = await User.findOne({ username : auth?.user?.username , loginToken: auth?.user?.loginToken });
+      const isOnLoginPage = nextUrl.pathname === '/' || nextUrl.pathname === '/connect';
 
-        if (!user) {
-          return false;
-        }
+      console.log("Auth user:", auth?.user);
+      console.log({ isLoggedIn, isOnLoginPage });
 
-        if(isLoggedIn) return Response.redirect(new URL('/dashboard', nextUrl));
-        return true;
+      if (isOnLoginPage) {
+        if (!auth?.user?.username || !auth?.user?.loginToken) return false;
+
+        const user = await User.findOne({ 
+          username: auth.user.username, 
+          loginToken: auth.user.loginToken 
+        });
+
+        return !!user; // Return true if user exists, false otherwise
       }
-      else{
-        if(isLoggedIn) return true;
-        return false;
-      }
+
+      return isLoggedIn; // Allow access to other pages only if logged in
     },
     async session({ session, token, user }:any) {
       session.user = token.user
