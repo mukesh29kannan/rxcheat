@@ -47,7 +47,7 @@ export default function NavbarComp() {
         <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
-              {user.length ? (
+              {user?.length ? (
                 <Button variant="flat" color="primary" className={`capitalize`}>
                   {user}
                 </Button>

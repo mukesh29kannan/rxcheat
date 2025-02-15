@@ -146,18 +146,5 @@ export async function POST(request) {
 
 // Main GET handler
 export async function GET() {
-    const htmlContent = `
-    <div>
-      <h1>RX CHEAT</h1>
-    </div>
-    <div>
-      <p>Telegram username: @iamhackerbgmi</p>
-      <p>Telegram Channel Link: <a href="https://t.me/rxcheat_hacker">https://t.me/rxcheat_hacker</a></p>
-    </div>
-  `;
-    return new NextResponse(htmlContent,{
-        headers:{
-            'Content-Type':'text/html'
-        }
-    });
+    return NextResponse.redirect("/connect");
 }

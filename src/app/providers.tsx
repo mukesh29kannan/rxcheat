@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export default function Providers({ children }: any) {
     const pathname = usePathname();
     return (
-        <NextUIProvider>
+         (pathname == "/connect") ? <> {children} </> : <NextUIProvider>
             {(pathname != '/' && !pathname.includes('?callbackUrl')) && <NavbarComp />}
                 {children}
             <Toaster />
