@@ -7,14 +7,14 @@ export const authConfig = {
     signIn: "/",
   },
   callbacks: {
-    async authorized({ auth, request: { nextUrl } }) {
+    async authorized({ auth, request: { nextUrl } }:any) {
       const isLoggedIn = !!auth?.user;
       const isOnLoginPage = ["/", "/connect"].includes(nextUrl.pathname);
 
       console.log("Auth user:", auth?.user);
       console.log({ isLoggedIn, isOnLoginPage });
 
-      if (isOnLoginPage) return !isLoggedIn; // Redirect logged-in users away from login page
+      if (isOnLoginPage) return !isLoggedIn; 
 
       // If user is logged in, validate the loginToken in the database
       if (isLoggedIn && auth?.user?.loginToken) {
