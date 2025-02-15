@@ -2,6 +2,7 @@
 
 import DeleteUser from "@/components/DeleteUser";
 import DeleteUserKeys from "@/components/DeleteUserKeys";
+import Logout from "@/components/Logout";
 import {
   Button,
   Chip,
@@ -217,6 +218,7 @@ export default function UsersList() {
                         {getBlockStatus(user?.isActive, user?._id)}
                         <DeleteUser keys={user} />
                         <DeleteUserKeys keys={user} />
+                        <Logout keys={user?._id} />
                       </div>
                     </TableCell>
                   </TableRow>
