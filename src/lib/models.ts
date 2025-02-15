@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required:true
     },
+    loginToken :{
+      type: String,
+      required:false
+    },
     isActive:{
       type:Number,
       required:true
