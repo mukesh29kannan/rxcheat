@@ -1,27 +1,20 @@
-"use client"
-import React, { useEffect } from "react";
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import React from "react";
+import { Vortex } from "../ui/vortex";
 
-export default function Connect() {
-
-  useEffect(() => {
-      history?.pushState(null, "", '/api/connect');
-    }, [])
-
+export function VortexDemo() {
   return (
-    <BackgroundBeamsWithCollision>
-      <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-white font-sans tracking-tight">
-      RX Cheat
-      <br></br>
-        <div className="relative mx-auto inline-block w-max drop-shadow-lg">
-          <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-blue-500 via-purple-500 to-pink-500">
-            <span className="blur-sm opacity-80"><a href="https://t.me/rxcheat_hacker">@iamhackerbgmi</a></span>
-          </div>
-          <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 py-4">
-            <span className="shadow-lg"><a href="https://t.me/rxcheat_hacker">@iamhackerbgmi</a></span>
-          </div>
-        </div>
-      </h2>
-    </BackgroundBeamsWithCollision>
+    <div className="w-[calc(100%-4rem)] mx-auto rounded-md  h-[30rem] overflow-hidden">
+      <Vortex
+        backgroundColor="black"
+        className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
+      >
+        <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
+          RX Cheat
+        </h2>
+        <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center">
+          <a href="https://t.me/rxcheat_hacker">@iamhackerbgmi</a>
+        </p>
+      </Vortex>
+    </div>
   );
 }
