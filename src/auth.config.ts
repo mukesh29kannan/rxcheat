@@ -5,17 +5,13 @@ export const authConfig = {
     signIn: '/',
   },
   callbacks: {
-    async authorized({ auth, request: { nextUrl } }: any) {
+    async authorized({ auth, request: { nextUrl } }:any) {
+      // Check if the user is authenticated
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname == "/" || nextUrl.pathname == "/connect" || nextUrl.pathname == "/api/connect";
-
-      console.log("Auth user:", auth?.user);
-      console.log({ isLoggedIn, isOnLoginPage });
-
-      if (!auth?.user) return false; // Ensure user exists before accessing properties.
-
-      if (isOnLoginPage) {
-        // Call an API route instead of using Mongoose here
+      const isOnLoginPage = nextUrl.pathname == '/';
+      console.log("auth user",auth?.user)
+      console.log({isLoggedIn,isOnLoginPage})
+      if(isLoggedIn){
         const res = await fetch(`/api/check-user`, {
           method: "POST",
           body: JSON.stringify({
@@ -28,12 +24,15 @@ export const authConfig = {
         const data = await res.json();
         console.log({data})
         if (!data.valid) return false;
-
-        // Redirect logged-in users from login page to dashboard
-        return Response.redirect(new URL("/dashboard", nextUrl));
       }
-
-      return isLoggedIn; // Allow access to other pages only if logged in
+      if(isOnLoginPage){
+        if(isLoggedIn) return Response.redirect(new URL('/dashboard', nextUrl));
+        return true;
+      }
+      else{
+        if(isLoggedIn) return true;
+        return false;
+      }
     },
     async session({ session, token, user }:any) {
       session.user = token.user
