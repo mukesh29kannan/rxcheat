@@ -85,6 +85,7 @@ export default function EditKeyComp({id,loading,fields}:any) {
                                     onChange={(e) => setKeyFields({ ...keyFields, key: e.target.value })}
                                     isInvalid={!!errors.key}
                                     errorMessage={errors.key}
+                                    isDisabled
                                 />
 
                                 {/* Game Input */}
@@ -105,6 +106,8 @@ export default function EditKeyComp({id,loading,fields}:any) {
                                     onChange={(e) => setKeyFields({ ...keyFields, period: e.target.value })}
                                     isInvalid={!!errors.period}
                                     errorMessage={errors.period}
+                                    defaultSelectedKeys={fields.period}
+                                    isDisabled
                                 >
                                     {periods.map((period) => (
                                         <SelectItem key={period.value} value={period.value}>
