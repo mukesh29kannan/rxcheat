@@ -1,7 +1,8 @@
+"use client"
 import React, { useEffect } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
-export default function Test() {
+export default function Connect() {
 
   useEffect(() => {
       history?.pushState(null, "", '/api/connect');
