@@ -5,16 +5,11 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { PiKeyFill } from "react-icons/pi";
+import { PiPencilSimpleFill } from "react-icons/pi";
 
-export default function AddKeyComp() {
+export default function EditKeyComp({id,loading,fields}:any) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [keyFields, setKeyFields] = useState({
-        key: '',
-        period: '',
-        noDevices: '',
-        game: 'PUBG'
-    });
+    const [keyFields, setKeyFields] = useState(fields);
     const [errors, setErrors] = useState<any>({}); 
 
     const periods = [
@@ -51,13 +46,13 @@ export default function AddKeyComp() {
             const response = await fetch('/api/key/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(keyFields)
+                body: JSON.stringify({...keyFields,id})
             });
 
             if (!response.ok) {
-                toast.error('Key already exists');
+                toast.error('Invalid details');
             } else {
-                toast.success('Key created successfully');
+                toast.success('Key updated successfully');
                 setKeyFields({ key: '', period: '', noDevices: '', game: 'PUBG' });
                 onOpenChange();
             }
@@ -68,15 +63,17 @@ export default function AddKeyComp() {
 
     return (
         <>
-            <Button onPress={onOpen} color="primary" size="sm" variant="shadow" endContent={<PiKeyFill />}>
-                Generate
+            <Button onPress={onOpen} isIconOnly className="bg-transparent" isLoading={loading}>
+                <span className="text-lg text-warning bg-transparent cursor-pointer active:opacity-50">
+                    <PiPencilSimpleFill/>
+                </span>
             </Button>
 
             <Modal isOpen={isOpen} placement="auto" onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Generate New Key</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Edit Key</ModalHeader>
                             <ModalBody>
                                 {/* Key Input */}
                                 <Input

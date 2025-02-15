@@ -6,6 +6,7 @@ import DeleteKeyComp from "./DeleteKeyComp";
 import { MdBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
 import ResetDevices from "./ResetDevices";
+import EditKeyComp from "./EditKeyComp";
 
 export default function KeyListComp() {
     const [datas, setData] = useState<any[]>([]);
@@ -164,6 +165,7 @@ export default function KeyListComp() {
                                     <DeleteKeyComp keys={key} />
                                     {getStatus(key?.isActive, key?._id)}
                                     <ResetDevices keys={key} />
+                                    <EditKeyComp id={key?._id} loading={loading} fields={key}/>
                                 </div>
                             </TableCell>
                         </TableRow>
