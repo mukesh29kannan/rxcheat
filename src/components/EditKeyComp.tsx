@@ -106,7 +106,7 @@ export default function EditKeyComp({id,loading,fields}:any) {
                                     onChange={(e) => setKeyFields({ ...keyFields, period: e.target.value })}
                                     isInvalid={!!errors.period}
                                     errorMessage={errors.period}
-                                    defaultSelectedKeys={fields.period}
+                                    defaultSelectedKeys={new Set([fields.period])}
                                     isDisabled
                                 >
                                     {periods.map((period) => (
