@@ -4,7 +4,6 @@ import { Vortex } from "@/components/ui/vortex";
 
 export default function Connect() {
   return (
-    <div className="w-[calc(100%-4rem)] mx-auto rounded-md  h-[30rem] overflow-hidden">
       <Vortex
         backgroundColor="black"
         className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
@@ -16,6 +15,5 @@ export default function Connect() {
           <a href="https://t.me/rxcheat_hacker">@iamhackerbgmi</a>
         </p>
       </Vortex>
-    </div>
   );
 }
