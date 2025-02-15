@@ -6,7 +6,7 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      // Check if the user is authenticated
+      // Check if the user is authenticated 
       const isLoggedIn = !!auth?.user;
       const isOnLoginPage = nextUrl.pathname == '/' || nextUrl.pathname == '/connect';
       console.log("auth user",auth?.user)
