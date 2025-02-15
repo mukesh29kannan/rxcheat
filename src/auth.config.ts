@@ -8,7 +8,7 @@ export const authConfig = {
     async authorized({ auth, request: { nextUrl } }:any) {
       // Check if the user is authenticated
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname == '/';
+      const isOnLoginPage = nextUrl.pathname == '/' || nextUrl.pathname == '/connect'  ;
       console.log("auth user",auth?.user)
       console.log({isLoggedIn,isOnLoginPage})
       if(isLoggedIn){
