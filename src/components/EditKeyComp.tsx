@@ -43,7 +43,7 @@ export default function EditKeyComp({id,loading,fields}:any) {
         }
 
         try {
-            const response = await fetch('/api/key/create', {
+            const response = await fetch('/api/key/edit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({...keyFields,id})
