@@ -4,6 +4,11 @@ import { connectToDb } from "@/lib/mutils";
 import { User } from "@/lib/models";
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
+import { createHash } from "crypto";
+
+const generateToken = (username: string) => {
+  return createHash("sha256").update(username + Date.now().toString()).digest("hex");
+};
 
 const login = async (credentials: any) => {
     try {
@@ -15,7 +20,9 @@ const login = async (credentials: any) => {
       const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
       if (!isPasswordCorrect) throw new Error("Incorrect username or password.");
       if(user.isActive != 1) throw new Error("Incorrect username or password.");
-      return user;
+      const loginToken = generateToken(credentials.username);
+      const recentuser = await User.findOneAndUpdate({ username: credentials.username }, { $set: { loginToken } },{ new: true });
+      return recentuser;
     } catch (error) {
       console.error("Login failed:", error);
       throw new Error("Authentication failed.");
