@@ -16,7 +16,7 @@ export const authConfig = {
 
       if (isOnLoginPage) {
         // Call an API route instead of using Mongoose here
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/check-user`, {
+        const res = await fetch(`/api/check-user`, {
           method: "POST",
           body: JSON.stringify({
             username: auth.user.username,
