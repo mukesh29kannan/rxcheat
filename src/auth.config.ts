@@ -8,9 +8,10 @@ export const authConfig = {
     async authorized({ auth, request: { nextUrl } }:any) {
       // Check if the user is authenticated
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname == '/' || nextUrl.pathname == '/connect'  ;
+      const isOnLoginPage = nextUrl.pathname == '/';
       console.log("auth user",auth?.user)
-      console.log({isLoggedIn,isOnLoginPage})
+      console.log({isLoggedIn,isOnLoginPage});
+      if(nextUrl.pathname == '/connect') return true; 
       if(isLoggedIn){
         const res = await fetch('https://rxcheat.vercel.app/api/check-user', {
           method: "POST",
