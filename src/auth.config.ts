@@ -7,7 +7,7 @@ export const authConfig = {
   callbacks: {
     async authorized({ auth, request: { nextUrl } }: any) {
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname === "/" || nextUrl.pathname === "/connect";
+      const isOnLoginPage = nextUrl.pathname == "/" || nextUrl.pathname == "/connect" || nextUrl.pathname == "/api/connect";
 
       console.log("Auth user:", auth?.user);
       console.log({ isLoggedIn, isOnLoginPage });
