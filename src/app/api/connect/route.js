@@ -146,5 +146,5 @@ export async function POST(request) {
 
 // Main GET handler
 export async function GET() {
-    return NextResponse.redirect("/connect");
+    return NextResponse.redirect("https://rxcheat.vercel.app/connect");
 }
