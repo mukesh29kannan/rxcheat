@@ -169,7 +169,21 @@ export default function UsersList() {
             isLoading={loading}
             onClick={(e) => block(id)}
           >
-            <span className="text-lg text-warning bg-transparent cursor-pointer active:opacity-50">
+            <span className="text-lg text-danger bg-transparent cursor-pointer active:opacity-50">
+              <BiSolidShieldAlt2 />
+            </span>
+          </Button>
+      </Tooltip>
+    }
+    else{
+      return <Tooltip content="Secure User">
+        <Button
+            isIconOnly
+            className="bg-transparent"
+            isLoading={loading}
+            onClick={(e) => block(id)}
+          >
+            <span className="text-lg text-success bg-transparent cursor-pointer active:opacity-50">
               <BiSolidShieldAlt2 />
             </span>
           </Button>
@@ -237,6 +251,9 @@ export default function UsersList() {
                         <DeleteUser keys={user} />
                         <DeleteUserKeys keys={user} />
                         <Logout id={user?._id} />
+                        {
+                          getLoginProtect(user.isLoginProtected,user?._id)
+                        }
                       </div>
                     </TableCell>
                   </TableRow>

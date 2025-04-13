@@ -48,6 +48,7 @@ export default function LoginForm({ setSelected }: { setSelected: any }) {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch('/api/get-cookie')
       .then(res => res.json())
       .then(data => {
@@ -65,7 +66,9 @@ export default function LoginForm({ setSelected }: { setSelected: any }) {
           setIp(data.token)
         }
       })
-      .catch(err => console.error('Fetch error (get-cookie):', err));
+      .catch(err => console.error('Fetch error (get-cookie):', err)).finally(()=>{
+        setLoading(false)
+      });
   }, []);  
   
 
