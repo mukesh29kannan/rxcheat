@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
     maxAge: 60 * 60 * 24 * 365, // 1 year
   });
 
+  console.log({ip})
   const response = NextResponse.json({ message: 'Cookie set!', ip });
   response.headers.set('Set-Cookie', cookie); // crucial part!
   return response;

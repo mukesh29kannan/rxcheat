@@ -5,5 +5,6 @@ import { parse } from 'cookie';
 export async function GET(req: NextRequest) {
   const cookies = parse(req.headers.get('cookie') || '');
   const token = cookies.token || null;
+  console.log({token})
   return NextResponse.json({ token });
 }
