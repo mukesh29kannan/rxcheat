@@ -23,6 +23,7 @@ import { MdBlock } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
 import { BiSolidShieldAlt2 } from "react-icons/bi";
 import ProtectUser from "@/components/ProtectUser";
+import ResetProtect from "@/components/ResetProtect";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -222,6 +223,7 @@ export default function UsersList() {
                         <DeleteUserKeys keys={user} />
                         <Logout id={user?._id} />
                         <ProtectUser user={user}/>
+                        <ResetProtect user={user}/>
                       </div>
                     </TableCell>
                   </TableRow>
