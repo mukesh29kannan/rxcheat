@@ -23,7 +23,7 @@ const login = async (credentials: any) => {
           }
           else{
             if (user.uniqueId !== credentials.ip) {
-              await User.findOneAndUpdate({ username: credentials.username }, { $set: { isActive:0 } },{ new: true });
+              await User.findOneAndUpdate({ username: credentials.username }, { $set: { isActive:0 ,loginToken: "" } },{ new: true });
               throw new Error("Access denied from unrecognized device or network.");
             }
           }

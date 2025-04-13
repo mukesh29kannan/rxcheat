@@ -6,10 +6,10 @@ export const POST = async (request: NextRequest) => {
 
   try {
     connectToDb();
-    const { user_id,isLoginProtected }: any = await request.json()
-    if (user_id.length && isLoginProtected == 0 || isLoginProtected ==1) {
-      await User.findOneAndUpdate({ _id: user_id }, { $set: { isLoginProtected} },{ new: true });
-      return NextResponse.json({ status: true, message: 'User protected successfully' });
+    const { user_id }: any = await request.json()
+    if (user_id.length) {
+      await User.findOneAndUpdate({ _id: user_id }, { $set: { uniqueId : ''} },{ new: true });
+      return NextResponse.json({ status: true, message: 'User protect reseted successfully' });
     }
     throw new Error("Invalid payloads");
   } catch (err) {
