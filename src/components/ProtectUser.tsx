@@ -18,10 +18,10 @@ export default function ProtectUser({user}:any){
           });
       
           if (!response.ok) {
-            toast.error('Unable to delete the user')
+            toast.error('Unable to protect the user')
           }
           else {
-            toast.success('User deleted successfully')
+            toast.success('User protect successfully')
             location.reload();
           }
     }

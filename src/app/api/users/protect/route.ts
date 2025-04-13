@@ -9,7 +9,6 @@ export const POST = async (request: NextRequest) => {
     const { user_id,isLoginProtected }: any = await request.json()
     if (user_id.length && isLoginProtected == 0 || isLoginProtected ==1) {
       await User.findOneAndUpdate({ _id: user_id }, { $set: { isLoginProtected} },{ new: true });
-      await User.findByIdAndDelete(user_id)
       return NextResponse.json({ status: true, message: 'User deleted successfully' });
     }
     throw new Error("Invalid payloads");
