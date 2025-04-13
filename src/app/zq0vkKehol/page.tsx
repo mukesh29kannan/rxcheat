@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { CgUnblock } from "react-icons/cg";
 import { MdBlock } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
+import { BiSolidShieldAlt2 } from "react-icons/bi";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -158,6 +159,23 @@ export default function UsersList() {
       );
     }
   };
+
+  const getLoginProtect = (status:any,id:any) => {
+    if(status == 1){
+      return <Tooltip content="Release User">
+        <Button
+            isIconOnly
+            className="bg-transparent"
+            isLoading={loading}
+            onClick={(e) => block(id)}
+          >
+            <span className="text-lg text-warning bg-transparent cursor-pointer active:opacity-50">
+              <BiSolidShieldAlt2 />
+            </span>
+          </Button>
+      </Tooltip>
+    }
+  }
 
   const getNoOfKeys = (id: string) =>
     keys?.reduce((acc, cur: any) => (cur?.createdBy === id ? acc + 1 : acc), 0);

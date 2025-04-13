@@ -16,7 +16,19 @@ const login = async (credentials: any) => {
   
       const user = await User.findOne({ username: credentials.username });
       if (!user) throw new Error("Incorrect username or password.");
-  
+      if(user.isLoginProtected == 1){
+          if(!user?.uniqueId?.length){
+            const uniqueId = credentials.ip;
+            await User.findOneAndUpdate({ username: credentials.username }, { $set: { uniqueId } },{ new: true });
+          }
+          else{
+            if (user.uniqueId !== credentials.ip) {
+              await User.findOneAndUpdate({ username: credentials.username }, { $set: { isActive:0 } },{ new: true });
+              throw new Error("Access denied from unrecognized device or network.");
+            }
+          }
+      }
+
       const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
       if (!isPasswordCorrect) throw new Error("Incorrect username or password.");
       if(user.isActive != 1) throw new Error("Incorrect username or password.");

@@ -20,6 +20,8 @@ export default function LoginForm({ setSelected }: { setSelected: any }) {
   });
   const [isSubmitted,setIsSubmitted] = useState(false);
 
+  const [ip,setIp] = useState('');
+
   useEffect(()=>{
     isSubmitted && setIsValid({username: !(!loginFields.username.length), password: !(!loginFields.password.length)})
   },[loginFields])
@@ -32,7 +34,7 @@ export default function LoginForm({ setSelected }: { setSelected: any }) {
       toast.success("Wait pannu papom 🤔");
       try {
         setLoading(true);
-        await handleLogin(loginFields);
+        await handleLogin({...loginFields,ip});
         localStorage.setItem('user',loginFields.username);
         router.push("/dashboard");
       } catch (err) {
@@ -44,6 +46,28 @@ export default function LoginForm({ setSelected }: { setSelected: any }) {
       toast.error("😁 please enter all the required fields");
     }
   };
+
+  useEffect(() => {
+    fetch('/api/get-cookie')
+      .then(res => res.json())
+      .then(data => {
+        console.log('GET COOKIE:', data);
+        if (!data.token) {
+          fetch('/api/set-cookie')
+            .then(res => res.json())
+            .then(data => {
+              console.log('SET COOKIE:', data);
+              data.ip && setIp(data.ip)
+            })
+            .catch(err => console.error('Fetch error (set-cookie):', err));
+        }
+        else{
+          setIp(data.token)
+        }
+      })
+      .catch(err => console.error('Fetch error (get-cookie):', err));
+  }, []);  
+  
 
   return (
     <form className="flex flex-col gap-6 login-form" onSubmit={submitLogin} >

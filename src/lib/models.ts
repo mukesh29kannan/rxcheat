@@ -31,6 +31,13 @@ const userSchema = new mongoose.Schema(
     isDown:{
       type:Number,
       required:true
+    },
+    isLoginProtected:{
+      type:Number
+    },
+    uniqueId:{
+      type:String,
+      required:true
     }
   },
   { timestamps: true }
