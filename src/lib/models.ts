@@ -36,8 +36,7 @@ const userSchema = new mongoose.Schema(
       type:Number
     },
     uniqueId:{
-      type:String,
-      required:true
+      type:String
     }
   },
   { timestamps: true }
