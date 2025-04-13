@@ -11,7 +11,7 @@ export const POST = async (request: NextRequest) => {
         const session: any = await auth();
         const userId = session.user._id;
         if (!session?.user || userId != "66c04834552408d0ab7975e0") return NextResponse.json({ status: false, message: 'Who are you' });
-        const users = await User.find().select('username name isActive').exec();
+        const users = await User.find().select('username name isActive isLoginProtected').exec();
         const keys = await Key.find().select('createdBy').exec();
         return NextResponse.json({ status: true, data: {users,keys} });
     }
