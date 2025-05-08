@@ -107,6 +107,15 @@ const logSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const epsDistance = new mongoose.Schema({
+  distance: {
+    type: String,
+    required: true,
+  }
+});
+
 export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Key = mongoose.models?.Key || mongoose.model("Key", keySchema);
 export const Logs = mongoose.models?.logs || mongoose.model("Logs",logSchema );
+export const EpsDistance = mongoose.models?.EpsDistance || mongoose.model("EpsDistance",epsDistance );
