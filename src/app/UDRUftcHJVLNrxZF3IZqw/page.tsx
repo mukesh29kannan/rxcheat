@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { encryptServer,decryptServer } from '@/lib/crypto';
+import { encryptServer,decryptServer } from '@/lib/serverCrypto';
 import { Button, Card, Textarea } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 

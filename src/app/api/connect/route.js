@@ -3,7 +3,8 @@ import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { parse } from "querystring";
 import { User, Key, Logs } from "@/lib/models";
-import {decryptServer} from "@lib/crypto"
+import {decryptServer} from "@lib/serverCrypto";
+
 // Helper function to generate MD5 hash
 const generateMD5 = (input) => {
     const hash = createHash("md5");
