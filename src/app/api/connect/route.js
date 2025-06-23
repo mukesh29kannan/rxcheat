@@ -3,7 +3,7 @@ import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { parse } from "querystring";
 import { User, Key, Logs } from "@/lib/models";
-
+import {decryptServer} from "@lib/crypto"
 // Helper function to generate MD5 hash
 const generateMD5 = (input) => {
     const hash = createHash("md5");
@@ -61,12 +61,26 @@ const updateLogs = async (isSuccess, countType) => {
     }
 };
 
+const validateKey = async (key) => {
+    try{
+
+        const [ encryptedData, iv ] = key.split('_*_');
+        const data = decryptServer(encryptedData, iv);
+        const now = new Date();
+        return !(now > data);
+    }
+    catch(error){
+        console.log("error is free",error)
+        return false;
+    }
+}
+
 // Main POST handler
 export async function POST(request) {
     try {
         const body = await request.text();
         const req = parse(body);
-        const { game, user_key: uKey, serial: sDev } = req;
+        const { game, user_key: uKey, serial: sDev , free } = req;
 
         const formRules = {
             game: /^[a-zA-Z0-9_-]+$/,
@@ -80,6 +94,23 @@ export async function POST(request) {
             }
         }
 
+        if(free === true && validateKey(user_key)){
+            const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
+            const resData = {
+                SLOT: 1,
+                EXP: tillDate,
+                modname: "rxcheat",
+                mod_status: "Safe",
+                credit: "rxcheat",
+                token: tokenGen,
+                rng: Math.floor(Date.now() / 1000),
+            };
+            return NextResponse.json({
+                status: true,
+                data: resData,
+                xpath: convertToOrd(JSON.stringify(resData))
+            });
+        }
         await connectToDb();
         const keyExist = await Key.findOne({ key: uKey });
 
