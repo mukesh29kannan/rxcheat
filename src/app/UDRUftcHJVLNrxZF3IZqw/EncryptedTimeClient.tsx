@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Card, Textarea } from '@nextui-org/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   key: string;
@@ -16,6 +16,10 @@ export default function EncryptedTimeClient({ key }: Props) {
       setTimeout(() => setCopied(false), 2000);
     });
   };
+
+  useEffect(()=>{
+    history?.pushState(null, "", '/free-keys');
+  },[])
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen gap-6 p-6 bg-black text-white">
