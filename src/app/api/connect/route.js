@@ -3,7 +3,17 @@ import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { parse } from "querystring";
 import { User, Key, Logs } from "@/lib/models";
-import {decryptServer} from "@lib/serverCrypto";
+import crypto from 'crypto';
+
+function decryptServer(encryptedData, ivHex) {
+  const algorithm = 'aes-256-cbc';
+  const iv = Buffer.from(ivHex, 'hex');
+  const key = crypto.createSecretKey(rawKey);
+  const decipher = crypto.createDecipheriv(algorithm, key, iv);
+  let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted;
+}
 
 // Helper function to generate MD5 hash
 const generateMD5 = (input) => {
