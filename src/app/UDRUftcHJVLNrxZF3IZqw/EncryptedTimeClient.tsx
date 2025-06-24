@@ -22,7 +22,7 @@ export default function EncryptedTimeClient({ keyValue,referer }: Props) {
 
   useEffect(()=>{
     history?.pushState(null, "", '/free-keys');
-    console.log({key,referer})
+    console.log({keyValue,referer})
   },[])
 
   return (
@@ -32,9 +32,9 @@ export default function EncryptedTimeClient({ keyValue,referer }: Props) {
       <Card className="p-4 w-full max-w-md bg-gray-800 border border-gray-700">
         <h2 className="text-xl mb-4">RXCHEAT Key</h2>
 
-        {key && key.length > 0 ? (
+        {keyValue && keyValue.length > 0 ? (
           <>
-            <Textarea readOnly value={key} className="mb-4" minRows={1} />
+            <Textarea readOnly value={keyValue} className="mb-4" minRows={1} />
 
             <Button color="primary" onClick={handleCopy}>
               {copied ? 'Copied RXCHEAT Key!' : 'Copy RXCHEAT Key'}
