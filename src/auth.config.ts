@@ -1,3 +1,4 @@
+import next from 'next';
 import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
@@ -11,7 +12,7 @@ export const authConfig = {
       const isOnLoginPage = nextUrl.pathname == '/';
       console.log("auth user",auth?.user)
       console.log({isLoggedIn,isOnLoginPage});
-      if(nextUrl.pathname == '/connect') return true; 
+      if(nextUrl.pathname == '/connect' || nextUrl.pathname == '/UDRUftcHJVLNrxZF3IZqw') return true; 
       if(isLoggedIn){
         const res = await fetch('https://rxcheat.vercel.app/api/check-user', {
           method: "POST",
