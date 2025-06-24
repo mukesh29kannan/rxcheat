@@ -22,7 +22,14 @@ function encryptServer(text:string) {
   };
 }
 
-export default async function EncryptedTimePage() {
+export default async function EncryptedTimePage({ searchParams }: { searchParams: any }) {
+  const referer = searchParams?.referer || ''; // fallback if needed
+
+  // Optional referer check (mock logic)
+  // if (!referer || !referer.includes("yourdomain.com")) {
+  //   return <EncryptedTimeClient keyValue="" />;
+  // }
+
   // This runs on server side
   const twoHoursLater = new Date(Date.now() + 2 * 60 * 60 * 1000);
   const textToEncrypt = twoHoursLater.toISOString();
@@ -30,5 +37,5 @@ export default async function EncryptedTimePage() {
   const { encryptedData, iv } = encryptServer(textToEncrypt);
   const key = `${encryptedData}_*_${iv}`;
 
-  return <EncryptedTimeClient key={key} />;
+  return <EncryptedTimeClient key={key} referer={referer}/>;
 }

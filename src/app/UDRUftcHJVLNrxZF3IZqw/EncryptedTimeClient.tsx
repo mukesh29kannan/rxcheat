@@ -5,9 +5,12 @@ import { useEffect, useState } from 'react';
 
 interface Props {
   key: string;
+  referer: string;
 }
 
-export default function EncryptedTimeClient({ key }: Props) {
+
+
+export default function EncryptedTimeClient({ key,referer }: Props) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -19,6 +22,7 @@ export default function EncryptedTimeClient({ key }: Props) {
 
   useEffect(()=>{
     history?.pushState(null, "", '/free-keys');
+    console.log({key,referer})
   },[])
 
   return (
