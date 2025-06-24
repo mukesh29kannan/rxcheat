@@ -37,6 +37,6 @@ export default async function EncryptedTimePage({ searchParams }: { searchParams
   const { encryptedData, iv } = encryptServer(textToEncrypt);
   console.log({ encryptedData, iv })
   const key = `${encryptedData}_*_${iv}`;
-
+  console.log({key})
   return <EncryptedTimeClient key={key} referer={referer}/>;
 }
