@@ -4,17 +4,17 @@ import { Button, Card, Textarea } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 
 interface Props {
-  key: string;
+  keyValue: string;
   referer: string;
 }
 
 
 
-export default function EncryptedTimeClient({ key,referer }: Props) {
+export default function EncryptedTimeClient({ keyValue,referer }: Props) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(key).then(() => {
+    navigator.clipboard.writeText(keyValue).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });

@@ -33,10 +33,7 @@ export default async function EncryptedTimePage({ searchParams }: { searchParams
   // This runs on server side
   const twoHoursLater = new Date(Date.now() + 2 * 60 * 60 * 1000);
   const textToEncrypt = twoHoursLater.toISOString();
-  console.log({twoHoursLater,textToEncrypt})
   const { encryptedData, iv } = encryptServer(textToEncrypt);
-  console.log({ encryptedData, iv })
-  const key = `${encryptedData}_*_${iv}`;
-  console.log({key})
-  return <EncryptedTimeClient key={key} referer={referer}/>;
+  const keyValue = `${encryptedData}_*_${iv}`;
+  return <EncryptedTimeClient keyValue={keyValue} referer={referer}/>;
 }
