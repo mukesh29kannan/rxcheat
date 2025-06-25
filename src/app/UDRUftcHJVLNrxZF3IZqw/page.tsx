@@ -18,7 +18,7 @@ function encryptServer(text:string) {
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   const input = `${encrypted}_*_${iv.toString('hex')}`;
-  return deflateSync(input).toString('base64');
+  return `rxcheat${deflateSync(input).toString('base64')}`;
 }
 
 export default async function EncryptedTimePage({ searchParams }: { searchParams: any }) {
