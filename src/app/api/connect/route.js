@@ -95,7 +95,7 @@ export async function POST(request) {
 
         const formRules = {
             game: /^[a-zA-Z0-9_-]+$/,
-            user_key: /^[a-zA-Z0-9]{1,36}$/,
+            //user_key: /^[a-zA-Z0-9]{1,36}$/,
             serial: /^[a-zA-Z0-9_-]+$/,
         };
 
