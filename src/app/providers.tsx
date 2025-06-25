@@ -6,11 +6,20 @@ import { usePathname } from "next/navigation";
 
 export default function Providers({ children }: any) {
     const pathname = usePathname();
+
+    // Pathnames where you want to skip NextUIProvider and Navbar
+    const skipWrapperPaths = ["/connect"];
+    const hideNavbarPaths = ["/", "/UDRUftcHJVLNrxZF3IZqw", "/free-keys"];
+
+    if (skipWrapperPaths.includes(pathname)) {
+        return <>{children}</>;
+    }
+
     return (
-         (pathname == "/connect") ? <> {children} </> : <NextUIProvider>
-            {(pathname != '/' && !pathname.includes('?callbackUrl') && pathname != 'UDRUftcHJVLNrxZF3IZqw' && pathname != 'free-keys') && <NavbarComp />}
-                {children}
+        <NextUIProvider>
+            {!hideNavbarPaths.includes(pathname) && <NavbarComp />}
+            {children}
             <Toaster />
         </NextUIProvider>
-    )
+    );
 }
