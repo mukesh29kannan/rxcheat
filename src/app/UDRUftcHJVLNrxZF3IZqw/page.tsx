@@ -1,5 +1,7 @@
 import EncryptedTimeClient from './EncryptedTimeClient';
 import crypto from 'crypto';
+import { deflateSync} from 'zlib';
+
 
 function encryptServer(text:string) {
 
@@ -15,11 +17,8 @@ function encryptServer(text:string) {
   const cipher = crypto?.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-
-  return {
-    encryptedData: encrypted,
-    iv: iv.toString('hex')
-  };
+  const input = `${encryptedData}_*_${iv.toString('hex')}`;
+  return deflateSync(input).toString('base64');
 }
 
 export default async function EncryptedTimePage({ searchParams }: { searchParams: any }) {
@@ -33,7 +32,7 @@ export default async function EncryptedTimePage({ searchParams }: { searchParams
   // This runs on server side
   const twoHoursLater = new Date(Date.now() + 2 * 60 * 60 * 1000);
   const textToEncrypt = twoHoursLater.toISOString();
-  const { encryptedData, iv } = encryptServer(textToEncrypt);
-  const keyValue = `${encryptedData}_*_${iv}`;
-  return <EncryptedTimeClient keyValue={keyValue} referer={referer}/>;
+  const encryptedData= encryptServer(textToEncrypt);
+
+  return <EncryptedTimeClient keyValue={encryptedData} referer={referer}/>;
 }
