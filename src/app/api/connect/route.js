@@ -74,9 +74,10 @@ const updateLogs = async (isSuccess, countType) => {
 
 const validateKey = async (key) => {
     try{
-
+        console.log("cane ib")
         const [ encryptedData, iv ] = key.split('_*_');
         const data = decryptServer(encryptedData, iv);
+        console.log({data})
         const now = new Date();
         return !(now > data);
     }
