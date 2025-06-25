@@ -109,7 +109,7 @@ export async function POST(request) {
             }
         }
 
-        if(uKey.includes("_*_") && validateKey(uKey)){
+        if(uKey.includes("rxcheat") && validateKey(uKey.split('rxcheat')[1]){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
