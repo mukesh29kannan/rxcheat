@@ -105,7 +105,7 @@ export async function POST(request) {
             }
         }
 
-        if(user_key.includes("_*_") && validateKey(user_key)){
+        if(uKey.includes("_*_") && validateKey(uKey)){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
