@@ -93,7 +93,7 @@ export async function POST(request) {
         const body = await request.text();
         const req = parse(body);
         const { game, user_key: uKey, serial: sDev } = req;
-
+        console.log({uKey})
         const formRules = {
             game: /^[a-zA-Z0-9_-]+$/,
             //user_key: /^[a-zA-Z0-9]{1,36}$/,
@@ -102,6 +102,7 @@ export async function POST(request) {
 
         for (const field in formRules) {
             if (!formRules[field].test(req[field])) {
+              console.log("validator fail")
                 return await respondWithError("badRequest", "Bad Parameter");
             }
         }
