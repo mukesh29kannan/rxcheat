@@ -17,7 +17,7 @@ function encryptServer(text:string) {
   const cipher = crypto?.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  const input = `${encryptedData}_*_${iv.toString('hex')}`;
+  const input = `${encrypted}_*_${iv.toString('hex')}`;
   return deflateSync(input).toString('base64');
 }
 
