@@ -30,7 +30,7 @@ export default function EncryptedTimeClient({ keyValue,referer }: Props) {
       <h1 className="text-4xl font-bold">RXCHEAT</h1>
 
       <Card className="p-4 w-full max-w-md bg-gray-800 border border-gray-700">
-        <h2 className="text-xl mb-4">RXCHEAT Key</h2>
+        <h2 className="text-xl mb-4">RXCHEAT Key (valid for 2 hours)</h2>
 
         {keyValue && keyValue.length > 0 ? (
           <>
