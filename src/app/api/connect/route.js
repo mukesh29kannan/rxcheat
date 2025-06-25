@@ -91,7 +91,7 @@ export async function POST(request) {
     try {
         const body = await request.text();
         const req = parse(body);
-        const { game, user_key: uKey, serial: sDev , free } = req;
+        const { game, user_key: uKey, serial: sDev } = req;
 
         const formRules = {
             game: /^[a-zA-Z0-9_-]+$/,
@@ -105,7 +105,7 @@ export async function POST(request) {
             }
         }
 
-        if(free === true && validateKey(user_key)){
+        if(user_key.includes("_*_") && validateKey(user_key)){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
