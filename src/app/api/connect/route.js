@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { parse } from "querystring";
 import { User, Key, Logs } from "@/lib/models";
 import crypto from 'crypto';
+import { inflateSync } from 'zlib';
 
 function decryptServer(encryptedData, ivHex) {
   const algorithm = 'aes-256-cbc';
@@ -75,7 +76,8 @@ const updateLogs = async (isSuccess, countType) => {
 const validateKey = async (key) => {
     try{
         console.log("cane ib")
-        const [ encryptedData, iv ] = key.split('_*_');
+        uKey = inflateSync(Buffer.from(key, 'base64')).toString();
+        const [ encryptedData, iv ] = uKey.split('_*_');
         const data = decryptServer(encryptedData, iv);
         console.log({data})
         const now = new Date();
