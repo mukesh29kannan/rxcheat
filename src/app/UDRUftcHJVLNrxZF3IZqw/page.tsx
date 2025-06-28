@@ -1,6 +1,5 @@
 import EncryptedTimeClient from './EncryptedTimeClient';
 import crypto from 'crypto';
-import { deflateSync} from 'zlib';
 
 function encryptServer(text:any) {
   const algorithm = 'aes-256-cbc';
@@ -15,9 +14,8 @@ function encryptServer(text:any) {
   encrypted += cipher.final('hex');
 
   const combined = `${encrypted}_*_${iv.toString('hex')}`;
-  const compressed = deflateSync(combined).toString('base64');
 
-  return `rxcheat${compressed}`;
+  return `rxcheat${combined}`;
 }
 
 // Example usage
