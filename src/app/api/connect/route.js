@@ -6,16 +6,36 @@ import { User, Key, Logs } from "@/lib/models";
 import crypto from 'crypto';
 import { inflateSync } from 'zlib';
 
-function decryptServer(encryptedData, ivHex) {
+import crypto from 'crypto';
+import { inflateSync } from 'zlib';
+
+function decryptServer(fullKey) {
   const algorithm = 'aes-256-cbc';
+  const secret = "your-secret-key-here"; // Same as above
+
+  if (!fullKey.startsWith("rxcheat")) {
+    throw new Error("Invalid prefix");
+  }
+
+  const compressed = fullKey.replace("rxcheat", "");
+  const decompressed = inflateSync(Buffer.from(compressed, 'base64')).toString();
+
+  const [encryptedData, ivHex] = decompressed.split('_*_');
   const iv = Buffer.from(ivHex, 'hex');
-  const rawKey = "20b5099d6678c34b6f54dbd0bdb2cf7adbd90de826ec15b32e9f4d2f66f8e0cb";
+
+  const rawKey = crypto.createHash('sha256').update(String(secret)).digest();
   const key = crypto.createSecretKey(rawKey);
+
   const decipher = crypto.createDecipheriv(algorithm, key, iv);
   let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
-  return decrypted;
+
+  return decrypted; // should be ISO string date
 }
+
+// Example usage
+// const decrypted = decryptServer(encryptedKey);
+// console.log(decrypted);
 
 // Helper function to generate MD5 hash
 const generateMD5 = (input) => {
