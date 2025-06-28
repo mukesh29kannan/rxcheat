@@ -98,7 +98,6 @@ const validateKey = async (key) => {
       //cosnole.log({uKey})
        // const [ encryptedData, iv ] = uKey.split('_*_');
         const data = decryptServer(key);
-        console.log({data})
         const now = new Date();
         return !(now > data);
     }
@@ -123,15 +122,11 @@ export async function POST(request) {
 
         for (const field in formRules) {
             if (!formRules[field].test(req[field])) {
-              console.log("validator fail")
                 return await respondWithError("badRequest", "Bad Parameter");
             }
         }
-        console.log("validation posted");
         const vali = await validateKey(uKey);
-        console.log({vali})
         if(uKey.includes("rxcheat") &&  vali != false){
-          console.log("generated")
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
