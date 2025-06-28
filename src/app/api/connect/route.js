@@ -110,7 +110,7 @@ export async function POST(request) {
                 return await respondWithError("badRequest", "Bad Parameter");
             }
         }
-        console.log("validation posted');
+        console.log("validation posted");
         if(uKey.includes("rxcheat") && validateKey(uKey.split('rxcheat')[1])){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
