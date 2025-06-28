@@ -132,7 +132,7 @@ export async function POST(request) {
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
-                EXP: tillDate,
+                EXP: '',
                 modname: "rxcheat",
                 mod_status: "Safe",
                 credit: "rxcheat",
