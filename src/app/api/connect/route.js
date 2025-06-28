@@ -127,7 +127,9 @@ export async function POST(request) {
             }
         }
         console.log("validation posted");
-        if(uKey.includes("rxcheat") && validateKey(uKey)){
+        const vali = validateKey(uKey);
+        console.log({vali})
+        if(uKey.includes("rxcheat") &&  vali != false){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
                 SLOT: 1,
