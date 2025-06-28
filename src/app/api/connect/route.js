@@ -9,6 +9,7 @@ import { inflateSync } from 'zlib';
 function decryptServer(encryptedData, ivHex) {
   const algorithm = 'aes-256-cbc';
   const iv = Buffer.from(ivHex, 'hex');
+  const rawKey = "20b5099d6678c34b6f54dbd0bdb2cf7adbd90de826ec15b32e9f4d2f66f8e0cb";
   const key = crypto.createSecretKey(rawKey);
   const decipher = crypto.createDecipheriv(algorithm, key, iv);
   let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
@@ -109,7 +110,7 @@ export async function POST(request) {
                 return await respondWithError("badRequest", "Bad Parameter");
             }
         }
-
+        console.log("validation posted');
         if(uKey.includes("rxcheat") && validateKey(uKey.split('rxcheat')[1])){
             const tokenGen = generateMD5(`PUBG-${uKey}-${sDev}-Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E`);
             const resData = {
