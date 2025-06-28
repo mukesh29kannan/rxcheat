@@ -2,7 +2,7 @@ import EncryptedTimeClient from './EncryptedTimeClient';
 import crypto from 'crypto';
 import { deflateSync} from 'zlib';
 
-function encryptServer(text) {
+function encryptServer(text:any) {
   const algorithm = 'aes-256-cbc';
   const secret = "your-secret-key-here"; // Change this or put in env
 
