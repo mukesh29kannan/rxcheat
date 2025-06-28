@@ -127,7 +127,7 @@ export async function POST(request) {
             }
         }
         console.log("validation posted");
-        const vali = validateKey(uKey);
+        const vali = await validateKey(uKey);
         console.log({vali})
         if(uKey.includes("rxcheat") &&  vali != false){
           console.log("generated")
