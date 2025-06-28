@@ -2,22 +2,28 @@ import EncryptedTimeClient from './EncryptedTimeClient';
 import crypto from 'crypto';
 import { deflateSync} from 'zlib';
 
-
-function encryptServer(text:string) {
-
+export function encryptServer(text) {
   const algorithm = 'aes-256-cbc';
+  const secret = "your-secret-key-here"; // Change this or put in env
 
-  const rawKey:any = "20b5099d6678c34b6f54dbd0bdb2cf7adbd90de826ec15b32e9f4d2f66f8e0cb";
-
+  const rawKey = crypto.createHash('sha256').update(String(secret)).digest();
   const key = crypto.createSecretKey(rawKey);
   const iv = crypto.randomBytes(16);
 
-  const cipher = crypto?.createCipheriv(algorithm, key, iv);
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  const input = `${encrypted}_*_${iv.toString('hex')}`;
-  return `rxcheat${deflateSync(input).toString('base64')}`;
+
+  const combined = `${encrypted}_*_${iv.toString('hex')}`;
+  const compressed = deflateSync(combined).toString('base64');
+
+  return `rxcheat${compressed}`;
 }
+
+// Example usage
+// const expiryDate = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString();
+// const encryptedKey = encryptServer(expiryDate);
+// console.log(encryptedKey);
 
 export default async function EncryptedTimePage({ searchParams }: { searchParams: any }) {
   const referer = searchParams?.referer || ''; // fallback if needed
@@ -28,9 +34,8 @@ export default async function EncryptedTimePage({ searchParams }: { searchParams
   // }
 
   // This runs on server side
-  const twoHoursLater = new Date(Date.now() + 2 * 60 * 60 * 1000);
-  const textToEncrypt = twoHoursLater.toISOString();
-  const encryptedData= encryptServer(textToEncrypt);
+ const expiryDate = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString();
+ const encryptedData= encryptServer(expiryDate);
 
   return <EncryptedTimeClient keyValue={encryptedData} referer={referer}/>;
 }
