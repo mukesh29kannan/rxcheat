@@ -6,9 +6,6 @@ import { User, Key, Logs } from "@/lib/models";
 import crypto from 'crypto';
 import { inflateSync } from 'zlib';
 
-import crypto from 'crypto';
-import { inflateSync } from 'zlib';
-
 function decryptServer(fullKey) {
   const algorithm = 'aes-256-cbc';
   const secret = "your-secret-key-here"; // Same as above
