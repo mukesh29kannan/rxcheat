@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { parse } from "querystring";
 import { User, Key, Logs } from "@/lib/models";
 import crypto from 'crypto';
-import { inflateSync } from 'zlib';
 
 function decryptServer(fullKey) {
   const algorithm = 'aes-256-cbc';
@@ -15,9 +14,9 @@ function decryptServer(fullKey) {
   }
 
   const compressed = fullKey.replace("rxcheat", "");
-  const decompressed = inflateSync(Buffer.from(compressed, 'base64')).toString();
+  //const decompressed = inflateSync(Buffer.from(compressed, 'base64')).toString();
 
-  const [encryptedData, ivHex] = decompressed.split('_*_');
+  const [encryptedData, ivHex] = compressed.split('_*_');
   const iv = Buffer.from(ivHex, 'hex');
 
   const rawKey = crypto.createHash('sha256').update(String(secret)).digest();
