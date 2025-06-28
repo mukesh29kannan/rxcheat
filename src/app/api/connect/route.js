@@ -17,6 +17,7 @@ function decryptServer(fullKey) {
   //const decompressed = inflateSync(Buffer.from(compressed, 'base64')).toString();
 
   const [encryptedData, ivHex] = compressed.split('_*_');
+  console.log({encryptedData, ivHex});
   const iv = Buffer.from(ivHex, 'hex');
 
   const rawKey = crypto.createHash('sha256').update(String(secret)).digest();
