@@ -7,9 +7,7 @@ function encryptServer(text:string) {
 
   const algorithm = 'aes-256-cbc';
 
-  const rawKey:any = crypto.createHash('sha256')
-    .update(String(process.env.SECRET_KEY))
-    .digest();
+  const rawKey:any = "20b5099d6678c34b6f54dbd0bdb2cf7adbd90de826ec15b32e9f4d2f66f8e0cb";
 
   const key = crypto.createSecretKey(rawKey);
   const iv = crypto.randomBytes(16);
