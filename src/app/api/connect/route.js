@@ -97,7 +97,7 @@ const validateKey = async (key) => {
         //const uKey = inflateSync(Buffer.from(key, 'base64')).toString();
       //cosnole.log({uKey})
        // const [ encryptedData, iv ] = uKey.split('_*_');
-        const data = decryptServer(key);
+        const data = new Date(decryptServer(key));
         const now = new Date();
         console.log({data,now});
         return !(now > data);
