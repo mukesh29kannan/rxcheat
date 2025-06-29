@@ -99,6 +99,7 @@ const validateKey = async (key) => {
        // const [ encryptedData, iv ] = uKey.split('_*_');
         const data = decryptServer(key);
         const now = new Date();
+        console.log({data,now});
         return !(now > data);
     }
     catch(error){
